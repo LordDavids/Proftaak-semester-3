@@ -1,0 +1,36 @@
+GET http://localhost:8080/api/auth/test
+Accept: application/json
+
+###
+POST http://localhost:8080/api/auth/authenticate
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "David@outlook.com",
+  "password": "David"
+}
+
+###
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+Accept: application/json
+
+
+{
+  "first_name": "David1",
+  "lastname": "David1",
+  "email": "David1@outlook.com",
+  "password": "David1"
+}
+
+###
+GET http://localhost:8080/api/demo
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiVVNFUiIsInN1YiI6IkRhdmlkQG91dGxvb2suY29tIiwiaWF0IjoxNzI3MTgyNjc4LCJleHAiOjE3MjcxODYyNzh9.JhQyWtTqJFWTn_-6z6p0LzEPZk8jnUBSL0q6Jnu5wY8
+Content-Type: application/json
+
+
+
+
+
+
