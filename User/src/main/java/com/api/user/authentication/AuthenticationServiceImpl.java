@@ -48,7 +48,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .orElseThrow();
 
         var claims = new HashMap<String, Object>();
-        claims.put("Role", Role.USER);
+        claims.put("Role", user.getAuthorities());
 
         var jwtToken = jwtServiceImpl.GenerateToken(claims, requestDTO.email());
         return new AuthenticationResponseDTO(jwtToken);
