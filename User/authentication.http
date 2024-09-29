@@ -26,7 +26,7 @@ Accept: application/json
 
 ###
 GET http://localhost:8080/api/demo
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjpbeyJhdXRob3JpdHkiOiJVU0VSIn1dLCJzdWIiOiJEYXZpZEBvdXRsb29rLmNvbSIsImlhdCI6MTcyNzQyOTk5OCwiZXhwIjoxNzI3NDMzNTk4fQ.LrdyCsV5INwfw-uQUaqqLBCzU_7Joz1yPUsXj_dT4H8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjpbeyJhdXRob3JpdHkiOiJVU0VSIn1dLCJzdWIiOiJEYXZpZEBvdXRsb29rLmNvbSIsImlhdCI6MTcyNzYwOTk1MiwiZXhwIjoxNzI3NjEzNTUyfQ.29IsnD8thc8-61qPa_Qa9-QujZsuxjwtmr5ztWQ7up0
 Content-Type: application/json
 
 
