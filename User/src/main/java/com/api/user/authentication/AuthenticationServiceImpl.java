@@ -3,7 +3,7 @@ package com.api.user.authentication;
 import com.api.user.user.Role;
 import com.api.user.user.UserRepository;
 import com.api.user.jwt.JwtServiceImpl;
-import com.api.user.user.user;
+import com.api.user.user.User;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,7 +27,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     public AuthenticationResponseDTO register(RegisterRequestDTO requestDTO) {
-        var user = new user(requestDTO.first_name(), requestDTO.lastname(), requestDTO.email(), passwordEncoder.encode(requestDTO.password()), Role.USER);
+        var user = new User(requestDTO.first_name(), requestDTO.lastname(), requestDTO.email(), passwordEncoder.encode(requestDTO.password()), Role.USER);
         userRepository.save(user);
 
         var claims = new HashMap<String, Object>();
@@ -48,7 +48,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .orElseThrow();
 
         var claims = new HashMap<String, Object>();
-        claims.put("Role", user.getAuthorities());
+        claims.put("roles",user.getAuthorities());
 
         var jwtToken = jwtServiceImpl.GenerateToken(claims, requestDTO.email());
         return new AuthenticationResponseDTO(jwtToken);

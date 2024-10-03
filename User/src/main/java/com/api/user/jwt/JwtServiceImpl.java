@@ -27,9 +27,8 @@ public class JwtServiceImpl implements JwtService {
     }
 
 
-    public boolean validateToken(String token, String email) {
-        String emailFromToken = getEmailFromToken(token);
-        return emailFromToken.equals(email) && !isTokenExpired(token);
+    public boolean validateToken(String token) {
+        return !isTokenExpired(token);
     }
 
     public boolean isTokenExpired(String token) {

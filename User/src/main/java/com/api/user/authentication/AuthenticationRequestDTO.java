@@ -1,7 +1,6 @@
 package com.api.user.authentication;
 
 public record AuthenticationRequestDTO (
-     String email,
+    String email,
     String password
-)
-{}
+    ) {}

@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class user implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,16 +28,16 @@ public class user implements UserDetails {
     @Column(nullable = false)
     private Role role;
 
-    public user() {}
+    public User() {}
 
-    public user(Long id, String first_name, String lastname, String email, String password) {
+    public User(Long id, String first_name, String lastname, String email, String password) {
         this.id = id;
         this.first_name = first_name;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
     }
-    public user(String first_name, String lastname, String email, String password, Role role) {
+    public User(String first_name, String lastname, String email, String password, Role role) {
         this.first_name = first_name;
         this.lastname = lastname;
         this.email = email;
@@ -46,7 +46,7 @@ public class user implements UserDetails {
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name().toUpperCase()));
     }
 
     @Override

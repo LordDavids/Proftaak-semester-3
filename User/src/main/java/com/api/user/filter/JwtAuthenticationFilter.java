@@ -1,18 +1,15 @@
-package com.api.user.config;
+package com.api.user.filter;
 
 import com.api.user.jwt.JwtServiceImpl;
 import com.api.user.user.UserRepository;
-import com.api.user.user.user;
+import com.api.user.user.User;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -47,12 +44,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             token = authHeader.substring(7);
             email = jwtServiceImpl.getEmailFromToken(token);
             if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                Optional<user> optionalUser = userRepository.findByEmail(email);
+                Optional<User> optionalUser = userRepository.findByEmail(email);
 
                 if (optionalUser.isPresent() && jwtServiceImpl.validateToken(token)) {
 
-                    user user = optionalUser.get();
-
+                    User user = optionalUser.get();
+                    System.out.println(user.getAuthorities());
                     UsernamePasswordAuthenticationToken authenticationToken =
                             new UsernamePasswordAuthenticationToken(
                                     user,
