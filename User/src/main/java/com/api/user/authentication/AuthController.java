@@ -1,5 +1,7 @@
 package com.api.user.authentication;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,14 +20,38 @@ public class AuthController {
         @RequestBody RegisterRequestDTO request
     )
     {
-        return ResponseEntity.ok(authenticationService.register(request));
+        String token = authenticationService.register(request).token();
+            ResponseCookie cookie = ResponseCookie.from("JWT", token)
+                    .httpOnly(true)
+                    .secure(false)
+                    .path("/")
+                    .maxAge(60 * 60)
+                    .sameSite("Lax")
+                    .build();
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                    .build();
+
     }
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponseDTO> authentication(
         @RequestBody AuthenticationRequestDTO request
     ){
-        return ResponseEntity.ok(authenticationService.authenticate(request));
+        String token = authenticationService.authenticate(request).token();
+            ResponseCookie cookie = ResponseCookie.from("JWT", token)
+                        .httpOnly(true)
+                        .secure(false)
+                        .path("/")
+                        .maxAge(60 * 60)
+                        .sameSite("Lax")
+                    .build();
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                    .build();
+
     }
 
     @GetMapping("/test")

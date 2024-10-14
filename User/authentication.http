@@ -7,8 +7,8 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "email": "David@outlook.com",
-  "password": "David"
+  "email": "David1@outlook.com",
+  "password": "David1"
 }
 
 ###
@@ -18,17 +18,16 @@ Accept: application/json
 
 
 {
-  "first_name": "David1",
-  "lastname": "David1",
-  "email": "David1@outlook.com",
-  "password": "David1"
+  "first_name": "David5",
+  "lastname": "David5",
+  "email": "David5@outlook.com",
+  "password": "David5"
 }
 
 ###
 GET http://localhost:8080/api/demo
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwic3ViIjoiRGF2aWQxQG91dGxvb2suY29tIiwiaWF0IjoxNzI3OTQyMTY2LCJleHAiOjE3Mjc5NDU3NjZ9.R47HFIQV9CKLf7VdzsnUs-Oz0XjVBquuVAI0CybPR_M
-Content-Type: application/json
-
+Accept: application/json
+Cookie: JWT=eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwic3ViIjoiRGF2aWQxQG91dGxvb2suY29tIiwiaWF0IjoxNzI4Mzc5NTU1LCJleHAiOjE3MjgzODMxNTV9.IFVwY5G6cvI8zVAc1iUo4TEFVsv3Xkgk0HX_rBg_3pQ
 
 
 

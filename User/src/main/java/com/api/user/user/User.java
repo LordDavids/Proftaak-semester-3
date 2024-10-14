@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class User implements UserDetails {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +24,9 @@ public class User implements UserDetails {
     private String email;
     @Column(nullable = false)
     private String password;
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
     public User() {}
@@ -44,12 +45,12 @@ public class User implements UserDetails {
         this.password = password;
         this.role = role;
     }
-    @Override
+
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name().toUpperCase()));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.getName().toUpperCase()));
     }
 
-    @Override
+
     public String getUsername() {
         return email;
     }
@@ -66,7 +67,7 @@ public class User implements UserDetails {
     public String getEmail() {return email;}
     public void setEmail(String email) {this.email = email;}
 
-    @Override
+
     public String getPassword() {return password;}
     public void setPassword(String password) {this.password = password;}
 }
