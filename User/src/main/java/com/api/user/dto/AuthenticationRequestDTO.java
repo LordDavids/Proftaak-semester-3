@@ -1,4 +1,4 @@
-package com.api.user.authentication;
+package com.api.user.dto;
 
 public record AuthenticationRequestDTO (
     String email,

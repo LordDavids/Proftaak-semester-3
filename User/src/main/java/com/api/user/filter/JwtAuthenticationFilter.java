@@ -1,8 +1,8 @@
 package com.api.user.filter;
 
-import com.api.user.jwt.JwtServiceImpl;
-import com.api.user.user.UserRepository;
-import com.api.user.user.User;
+import com.api.user.service.JwtServiceImpl;
+import com.api.user.repository.UserRepository;
+import com.api.user.entities.User;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;

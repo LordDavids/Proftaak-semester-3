@@ -1,22 +1,21 @@
-package com.api.user.authentication;
+package com.api.user.service;
 
+import com.api.user.dto.AuthenticationRequestDTO;
+import com.api.user.dto.AuthenticationResponseDTO;
+import com.api.user.dto.RegisterRequestDTO;
 import com.api.user.exeptions.invalidCredentialsException;
 import com.api.user.exeptions.userAlreadyExistsException;
-import com.api.user.user.Role;
-import com.api.user.user.UserRepository;
-import com.api.user.jwt.JwtServiceImpl;
-import com.api.user.user.User;
+import com.api.user.entities.Role;
+import com.api.user.repository.UserRepository;
+import com.api.user.entities.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.Locale;
+import java.util.List;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -31,7 +30,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     AuthenticationServiceImpl( UserRepository userRepository, JwtServiceImpl jwtServiceImpl) {
         this.userRepository = userRepository;
-        this.passwordEncoder = new BCryptPasswordEncoder(12);;
+        this.passwordEncoder = new BCryptPasswordEncoder(12);
         this.jwtServiceImpl = jwtServiceImpl;
     }
 
@@ -48,7 +47,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             claims.put("Role", user.getAuthorities());
 
             var jwtToken = jwtServiceImpl.GenerateToken(claims, requestDTO.email());
-            return new AuthenticationResponseDTO(jwtToken);
+            return new AuthenticationResponseDTO(jwtToken,
+                    user.getFirst_name(),
+                    user.getLastname(),
+                    user.getEmail(),
+                    user.getRole()
+            );
         } catch (DataIntegrityViolationException ex) {
             throw new userAlreadyExistsException("User with this email already exists");
         }
@@ -64,7 +68,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             claims.put("roles", user.getAuthorities());
 
             var jwtToken = jwtServiceImpl.GenerateToken(claims, requestDTO.email());
-            return new AuthenticationResponseDTO(jwtToken);
+            return new AuthenticationResponseDTO(jwtToken,
+                    user.getFirst_name(),
+                    user.getLastname(),
+                    user.getEmail(),
+                    user.getRole()
+            );
         }
         throw new invalidCredentialsException("invalid credentials");
 

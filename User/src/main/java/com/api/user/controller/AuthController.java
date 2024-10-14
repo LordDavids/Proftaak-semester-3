@@ -1,5 +1,10 @@
-package com.api.user.authentication;
+package com.api.user.controller;
 
+import com.api.user.dto.AuthenticationRequestDTO;
+import com.api.user.dto.AuthenticationResponseDTO;
+import com.api.user.entities.Auth;
+import com.api.user.service.AuthenticationService;
+import com.api.user.dto.RegisterRequestDTO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
@@ -16,31 +21,31 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponseDTO> register(
+    public ResponseEntity<Auth> register(
         @RequestBody RegisterRequestDTO request
     )
     {
-        String token = authenticationService.register(request).token();
-            ResponseCookie cookie = ResponseCookie.from("JWT", token)
-                    .httpOnly(true)
-                    .secure(false)
-                    .path("/")
-                    .maxAge(60 * 60)
-                    .sameSite("Lax")
-                    .build();
+        AuthenticationResponseDTO response = authenticationService.register(request);
+        ResponseCookie cookie = ResponseCookie.from("JWT", response.getToken())
+                .httpOnly(true)
+                .secure(false)
+                .path("/")
+                .maxAge(60 * 60)
+                .sameSite("Lax")
+                .build();
 
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.SET_COOKIE, cookie.toString())
-                    .build();
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                .body(new Auth(response));
 
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponseDTO> authentication(
+    public ResponseEntity<Auth> authentication(
         @RequestBody AuthenticationRequestDTO request
     ){
-        String token = authenticationService.authenticate(request).token();
-            ResponseCookie cookie = ResponseCookie.from("JWT", token)
+        AuthenticationResponseDTO response = authenticationService.authenticate(request);
+            ResponseCookie cookie = ResponseCookie.from("JWT", response.getToken())
                         .httpOnly(true)
                         .secure(false)
                         .path("/")
@@ -50,7 +55,7 @@ public class AuthController {
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.SET_COOKIE, cookie.toString())
-                    .build();
+                    .body(new Auth(response));
 
     }
 

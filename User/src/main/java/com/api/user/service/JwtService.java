@@ -1,6 +1,4 @@
-package com.api.user.jwt;
-
-import org.springframework.security.core.userdetails.UserDetails;
+package com.api.user.service;
 
 import java.util.Map;
 
