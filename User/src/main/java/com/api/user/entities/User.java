@@ -9,34 +9,29 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Collection;
 import java.util.List;
 
+@Getter
 @Entity
 @Table(name = "user")
 public class User {
 
     @Setter
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
     private Long id;
     @Setter
-    @Getter
     @Column(name = "first_name", nullable = false)
     private String first_name;
     @Setter
-    @Getter
     @Column(nullable = false)
     private String lastname;
     @Setter
-    @Getter
     @Column(nullable = false, unique = true, length = 320)
     private String email;
     @Setter
-    @Getter
     @Column(nullable = false)
     private String password;
 
-    @Getter
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;

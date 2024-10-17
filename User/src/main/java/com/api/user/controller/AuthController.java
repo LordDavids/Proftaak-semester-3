@@ -59,8 +59,18 @@ public class AuthController {
 
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "test";
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout() {
+        ResponseCookie jwtCookie = ResponseCookie.from("JWT", "")
+                .httpOnly(true)
+                .secure(false)
+                .path("/")
+                .maxAge(0)
+                .sameSite("Lax")
+                .build();
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
+                .build();
     }
 }

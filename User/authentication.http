@@ -7,8 +7,8 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "email": "David1@outlook.com",
-  "password": "David1"
+  "email": "David@outlook.com",
+  "password": "David"
 }
 
 ###
@@ -27,9 +27,11 @@ Accept: application/json
 ###
 GET http://localhost:8080/api/demo
 Accept: application/json
-Cookie: JWT=eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwic3ViIjoiRGF2aWQxQG91dGxvb2suY29tIiwiaWF0IjoxNzI4Mzc5NTU1LCJleHAiOjE3MjgzODMxNTV9.IFVwY5G6cvI8zVAc1iUo4TEFVsv3Xkgk0HX_rBg_3pQ
+Cookie: JWT=eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJzdWIiOiJEYXZpZEBvdXRsb29rLmNvbSIsImlhdCI6MTcyOTE1NzU2MywiZXhwIjoxNzI5MTYxMTYzfQ.Z_W0cp5xb_lxZAoBGsdfiCFg2ov5Y5kochamAHQinaU
 
-
+###
+GET http://localhost:8080/api/demo
+Accept: application/json
 
 
 
