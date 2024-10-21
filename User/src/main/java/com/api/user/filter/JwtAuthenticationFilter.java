@@ -1,7 +1,7 @@
 package com.api.user.filter;
 
+import com.api.user.entities.jwtUser;
 import com.api.user.service.JwtServiceImpl;
-import com.api.user.repository.UserRepository;
 import com.api.user.entities.User;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -22,11 +22,9 @@ import java.util.Optional;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtServiceImpl jwtServiceImpl;
-    private final UserRepository userRepository;
 
-    public JwtAuthenticationFilter(final JwtServiceImpl jwtServiceImpl, UserRepository userRepository) {
+    public JwtAuthenticationFilter(final JwtServiceImpl jwtServiceImpl) {
         this.jwtServiceImpl = jwtServiceImpl;
-        this.userRepository = userRepository;
 
     }
 
@@ -37,21 +35,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain)
             throws ServletException, IOException {
         final String token = getJwtFromCookies(request);
-        final String email;
+        final Long id;
 
         if (token == null) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        email = jwtServiceImpl.getEmailFromToken(token);
-        if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (SecurityContextHolder.getContext().getAuthentication() == null) {
 
-            if (optionalUser.isPresent() && jwtServiceImpl.validateToken(token)) {
-
-                User user = optionalUser.get();
-                var test = user.getAuthorities();
+            if (jwtServiceImpl.validateToken(token)) {
+                jwtUser user = jwtServiceImpl.getUserFromToken(token);
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(
                                 user,

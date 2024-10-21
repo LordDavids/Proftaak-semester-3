@@ -46,7 +46,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             var claims = new HashMap<String, Object>();
             claims.put("Role", user.getAuthorities());
 
-            var jwtToken = jwtServiceImpl.GenerateToken(claims, requestDTO.email());
+            var jwtToken = jwtServiceImpl.GenerateToken(claims, user.getId());
             return new AuthenticationResponseDTO(jwtToken,
                     user.getFirst_name(),
                     user.getLastname(),
@@ -67,7 +67,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             var claims = new HashMap<String, Object>();
             claims.put("roles", user.getAuthorities());
 
-            var jwtToken = jwtServiceImpl.GenerateToken(claims, requestDTO.email());
+            var jwtToken = jwtServiceImpl.GenerateToken(claims, user.getId());
             return new AuthenticationResponseDTO(jwtToken,
                     user.getFirst_name(),
                     user.getLastname(),

@@ -6,6 +6,6 @@ public interface JwtService {
 
     public boolean validateToken(String token);
     public boolean isTokenExpired(String token);
-    public String getEmailFromToken(String token);
-    public String GenerateToken(Map<String, Object> claims, String email);
+    public String getIdFromToken(String token);
+    public String GenerateToken(Map<String, Object> claims, Long id);
 }

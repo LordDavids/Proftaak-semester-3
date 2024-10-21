@@ -1,5 +1,7 @@
 package com.api.user.service;
 
+import com.api.user.entities.jwtUser;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.crypto.SecretKey;
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -40,7 +43,14 @@ public class JwtServiceImpl implements JwtService {
                 .before(new Date());
     }
 
-    public String getEmailFromToken(String token) {
+    public jwtUser getUserFromToken(String token) {
+        jwtUser user = new jwtUser();
+        user.setId(Long.parseLong(getIdFromToken(token)));
+        user.setRole(getRoleFromToken(token));
+        return user;
+    }
+
+    public String getIdFromToken(String token) {
         return Jwts.parser()
                 .verifyWith(secretKey)
                 .build()
@@ -49,11 +59,26 @@ public class JwtServiceImpl implements JwtService {
                 .get("sub", String.class);
     }
 
-    public String GenerateToken(Map<String, Object> claims, String email) {
+    public String getRoleFromToken(String token) {
+        Claims claims = Jwts.parser()
+                .verifyWith(secretKey)  // Use your secret key
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+
+        // Retrieve the "roles" claim as a list
+        List<Object> roles = claims.get("roles", List.class);
+        Map<String, String> role = (Map<String, String>) roles.getFirst(); // Cast to Map
+        // Get the value of "authority"
+        return role.get("authority");
+    }
+
+
+    public String GenerateToken(Map<String, Object> claims, Long id) {
             return Jwts
                     .builder()
                     .claims(claims)
-                    .subject(email)
+                    .subject(id.toString())
                     .issuedAt(new Date(System.currentTimeMillis()))
                     .expiration(new Date(System.currentTimeMillis() + jwtExpiration))
                     .signWith(secretKey, Jwts.SIG.HS256)
