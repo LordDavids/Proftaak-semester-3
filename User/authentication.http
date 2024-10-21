@@ -27,7 +27,7 @@ Accept: application/json
 ###
 GET http://localhost:8080/api/demo
 Accept: application/json
-Cookie: JWT=eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiMTAiLCJpYXQiOjE3Mjk1MTY5NzIsImV4cCI6MTcyOTUyMDU3Mn0.OCOlO4f_R9QspQA5DYebTgeBBXs2tjVTL1lvprRTcOo
+Cookie: JWT=eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiMTAiLCJpYXQiOjE3Mjk1MTczODIsImV4cCI6MTcyOTUyMDk4Mn0.UHn-8FgtHszDbZpj6RGgUTPABKXgYCIMg15hPDA4CTs
 
 ###
 GET http://localhost:8080/api/demo
