@@ -3,11 +3,6 @@ package com.api.user.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
-import java.util.Collection;
-import java.util.List;
 
 @Getter
 @Entity
@@ -53,7 +48,4 @@ public class User {
         this.role = role;
     }
 
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + role.getName().toUpperCase()));
-    }
 }

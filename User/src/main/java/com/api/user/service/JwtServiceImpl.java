@@ -67,10 +67,7 @@ public class JwtServiceImpl implements JwtService {
                 .getPayload();
 
         // Retrieve the "roles" claim as a list
-        List<Object> roles = claims.get("roles", List.class);
-        Map<String, String> role = (Map<String, String>) roles.getFirst(); // Cast to Map
-        // Get the value of "authority"
-        return role.get("authority");
+        return "ROLE_" + claims.get("roles", String.class);
     }
 
 

@@ -44,7 +44,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             userRepository.save(user);
 
             var claims = new HashMap<String, Object>();
-            claims.put("Role", user.getAuthorities());
+            claims.put("roles", user.getRole().getName());
 
             var jwtToken = jwtServiceImpl.GenerateToken(claims, user.getId());
             return new AuthenticationResponseDTO(jwtToken,
@@ -65,7 +65,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .orElseThrow(() -> new invalidCredentialsException("invalid credentials"));
         if (passwordEncoder.matches((requestDTO.password() + pepper), user.getPassword())) {
             var claims = new HashMap<String, Object>();
-            claims.put("roles", user.getAuthorities());
+            claims.put("roles", user.getRole().getName());
 
             var jwtToken = jwtServiceImpl.GenerateToken(claims, user.getId());
             return new AuthenticationResponseDTO(jwtToken,
