@@ -20,7 +20,6 @@ public class UserApplication {
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
-        String corsOrigin = this.corsOrigin;
 
         return new WebMvcConfigurer() {
             @Override

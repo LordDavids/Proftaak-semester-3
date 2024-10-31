@@ -18,6 +18,7 @@ api.interceptors.response.use((response) => {
                 'Content-Type': 'application/json'
             }
         }).then(() => {
+            console.log(error)
             user.value = null;
             router.push("/login");
         }).catch((error) => {

@@ -35,7 +35,7 @@ const logout = async() => {
       <div class="text-sm hidden md:flex space-x-6 ml-6 " >
         <router-link to="/" class="text-black group ">Home
           <div class="bg-black h-[2px] w-0 group-hover:w-full transition-all duration-500"></div></router-link>
-        <router-link to="/" class="text-black group ">Products
+        <router-link to="/product" class="text-black group ">Products
           <div class="bg-black h-[2px] w-0 group-hover:w-full transition-all duration-500"></div></router-link>
         <router-link to="/" class="text-black group ">About Us
           <div class="bg-black h-[2px] w-0 group-hover:w-full transition-all duration-500"></div></router-link>

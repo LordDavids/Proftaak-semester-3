@@ -2,9 +2,11 @@ package com.api.user.config;
 
 import com.api.user.filter.JwtAuthenticationFilter;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -15,6 +17,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+
+    @Value("${cors.origin}")
+    private String corsOrigin;
 
     public final JwtAuthenticationFilter jwtAuthFilter;
 
@@ -27,12 +32,14 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)  // Using the Customizer approach to disable CSRF
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()  // Allow unauthenticated access to specific endpoints
                         .requestMatchers("/api/demo").hasRole("ADMIN")
                         .anyRequest().authenticated()               // All other endpoints require authentication
                 )
+                .csrf(AbstractHttpConfigurer::disable)  // Using the Customizer approach to disable CSRF
+
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)  // Set session policy to stateless for JWT
                 )
