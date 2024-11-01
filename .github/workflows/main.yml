@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v2
       
       - name: Set up JDK
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
           java-version: '21'  # Using Java 21
           distribution: 'temurin'  # You can use 'adopt' or 'temurin'
@@ -27,7 +27,7 @@ jobs:
         run: mvn -Dtest=com.example.service.* test  # Modify as needed
       
       - name: Upload test results for User API
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: test-results-userapi
           path: target/surefire-reports
