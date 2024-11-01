@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router';
 import user from "../userStorage.ts";
-import axios from "axios";
 import {api} from "/src/services/apiClient.ts";
 
 const email = ref('')

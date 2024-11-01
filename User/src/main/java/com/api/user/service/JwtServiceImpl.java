@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import javax.crypto.SecretKey;
 import java.util.Base64;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -19,13 +18,12 @@ public class JwtServiceImpl implements JwtService {
     @Value("${security.jwt.expiration-time}")
     private long jwtExpiration;
 
-    private final SecretKey secretKey;
+    @Value("${security.jwt.secret-key}")
+    private String secretKeyString;
 
+    public SecretKey secretKey = Keys.hmacShaKeyFor(Base64.getDecoder().decode(secretKeyString));
 
-
-    public JwtServiceImpl(@Value("${security.jwt.secret-key}")String _base64SecretKey) {
-        byte[] keyBytes = Base64.getDecoder().decode(_base64SecretKey);
-        this.secretKey = Keys.hmacShaKeyFor(keyBytes);
+    public JwtServiceImpl() {
     }
 
 

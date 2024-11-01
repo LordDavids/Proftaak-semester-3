@@ -18,10 +18,10 @@ Accept: application/json
 
 
 {
-  "first_name": "David5",
-  "lastname": "David5",
-  "email": "David5@outlook.com",
-  "password": "David5"
+  "first_name": "David7",
+  "lastname": "David7",
+  "email": "David7@outlook.com",
+  "password": "David7"
 }
 
 ###

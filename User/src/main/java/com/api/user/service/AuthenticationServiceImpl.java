@@ -39,10 +39,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             var user = new User(requestDTO.first_name(),
                     requestDTO.lastname(),
                     requestDTO.email().toLowerCase(),
-                    passwordEncoder.encode(requestDTO.password() + pepper),
+                    EncodePassword(requestDTO.password()),
                     new Role("USER", 1));
             userRepository.save(user);
-
             var claims = new HashMap<String, Object>();
             claims.put("roles", user.getRole().getName());
 
@@ -81,4 +80,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 
     }
+    private String EncodePassword(String password) {
+        return passwordEncoder.encode(password + pepper);
+    }
+
 }

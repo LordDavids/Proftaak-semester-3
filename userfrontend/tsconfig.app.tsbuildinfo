@@ -1,0 +1,1 @@
+{"root":["./src/main.ts","./src/userstorage.ts","./src/vite-env.d.ts","./src/enteties/role.ts","./src/enteties/user.ts","./src/router/router.ts","./src/services/apiclient.ts","./src/app.vue","./src/components/navbar.vue","./src/views/errorpage.vue","./src/views/home.vue","./src/views/login.vue","./src/views/product.vue"],"errors":true,"version":"5.6.2"}

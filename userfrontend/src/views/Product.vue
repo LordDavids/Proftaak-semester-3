@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {api} from "../services/apiClient.ts";
-import router from "../router/router.ts";
 import {ref, onMounted} from "vue";
 
 const message = ref<string | null>(null);
