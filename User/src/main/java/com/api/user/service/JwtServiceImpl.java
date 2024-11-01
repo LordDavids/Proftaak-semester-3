@@ -78,7 +78,7 @@ public class JwtServiceImpl implements JwtService {
                     .expiration(new Date(System.currentTimeMillis() + jwtExpiration))
                     .signWith(secretKey, Jwts.SIG.HS256)
                     .compact();
-            
+
     }
 
 
