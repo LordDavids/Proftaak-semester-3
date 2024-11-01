@@ -25,7 +25,7 @@ jobs:
         working-directory: ./User
 
       - name: Run unit tests for User API
-        run: mvn -Dtest=com.example.service.* test  # Modify as needed
+        run: mvn -Dtest=com.api.user.service.*   # Modify as needed
       
       - name: Upload test results for User API
         uses: actions/upload-artifact@v4
