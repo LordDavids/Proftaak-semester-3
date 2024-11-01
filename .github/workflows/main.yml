@@ -23,7 +23,7 @@ jobs:
         working-directory: ./User
 
       - name: Run unit tests for User API
-        run: mvn -Dtest=com.api.user.service.* test  # Specify 'test' goal here
+        run: mvn -Dtest='com.api.user.service.**' test  # Specify 'test' goal here
         working-directory: ./User
       
       - name: Upload test results for User API
