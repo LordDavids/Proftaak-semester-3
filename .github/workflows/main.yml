@@ -22,6 +22,7 @@ jobs:
       
       - name: Build with Maven
         run: mvn clean install
+        working-directory: User/pom.xml
 
       - name: Run unit tests for User API
         run: mvn -Dtest=com.example.service.* test  # Modify as needed
