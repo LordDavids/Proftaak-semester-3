@@ -1,12 +1,10 @@
 name: CI/CD for Fontys Solutions
 
-# Defines when the pipeline runs
 on:
   push:
     branches:
       - main
 
-# Actions that are required while building
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,18 +15,19 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '21'  # Using Java 21
-          distribution: 'temurin'  # You can use 'adopt' or 'temurin'
+          java-version: '21'
+          distribution: 'temurin'
       
       - name: Build with Maven
         run: mvn clean install
         working-directory: ./User
 
       - name: Run unit tests for User API
-        run: mvn -Dtest=com.api.user.service.*   # Modify as needed
+        run: mvn -Dtest='com.api.user.service.**' test  # Specify 'test' goal here
+        working-directory: ./User
       
       - name: Upload test results for User API
         uses: actions/upload-artifact@v4
         with:
           name: test-results-userapi
-          path: target/surefire-reports
+          path: /target/surefire-reports  # Adjusted path
