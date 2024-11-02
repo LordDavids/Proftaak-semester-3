@@ -1,4 +1,4 @@
-name: CI/CD for Fontys Solutions
+name: CI for Fontys_solutions userapi
 
 on:
   push:
@@ -8,26 +8,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-      
-      - name: Build with Maven
-        run: mvn clean install
-        working-directory: ./User
 
-      - name: Run unit tests for User API
-        run: mvn -Dtest='com.api.user.service.**' test  # Specify 'test' goal here
-        working-directory: ./User
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 22
+      uses: actions/setup-java@v4
+      with:
+        java-version: '22'
+        distribution: 'temurin'
+
+    - name: Run tests service
+      run: mvn -Dtest=*ServiceImplTest test
+      working-directory: User
+
+    - name: Build with Maven
+      run: mvn clean package --file /pom.x
       
-      - name: Upload test results for User API
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results-userapi
-          path: /target/surefire-reports  # Adjusted path
+
