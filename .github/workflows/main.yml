@@ -20,7 +20,7 @@ jobs:
         distribution: 'temurin'
 
     - name: Run tests service
-      run: mvn -Dtest=com.api.user.service test
+      run: mvn -Dtest=*ServiceImplTest test
       working-directory: User
 
     - name: Build with Maven
