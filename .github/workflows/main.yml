@@ -19,10 +19,11 @@ jobs:
         java-version: '22'
         distribution: 'temurin'
 
-    - name: Build with Maven
-      run: mvn -B package
-      working-directory: User
-      
     - name: Run tests service
-      run: mvn -Dtest=com.api.user.service.* test
+      run: mvn -Dtest=com.api.user.service test
       working-directory: User
+
+    - name: Build with Maven
+      run: mvn clean package --file /pom.x
+      
+
