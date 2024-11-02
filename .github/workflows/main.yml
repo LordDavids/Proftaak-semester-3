@@ -20,3 +20,7 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
       working-directory: User
+
+    - name: Test units
+      run: mvn test
+      working-directory: User
