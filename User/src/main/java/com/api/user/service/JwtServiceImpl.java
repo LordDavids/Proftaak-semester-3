@@ -18,12 +18,11 @@ public class JwtServiceImpl implements JwtService {
     @Value("${security.jwt.expiration-time}")
     private long jwtExpiration;
 
-    @Value("${security.jwt.secret-key}")
-    private String secretKeyString;
+    private final SecretKey secretKey;
 
-    public SecretKey secretKey = Keys.hmacShaKeyFor(Base64.getDecoder().decode(secretKeyString));
-
-    public JwtServiceImpl() {
+    public JwtServiceImpl(@Value("${security.jwt.secret-key}")String _base64SecretKey) {
+        byte[] keyBytes = Base64.getDecoder().decode(_base64SecretKey);
+        this.secretKey = Keys.hmacShaKeyFor(keyBytes);
     }
 
 
