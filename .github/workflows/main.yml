@@ -23,4 +23,3 @@ jobs:
 
     - name: Test units
       run: mvn test --file pom.xml
-      working-directory: User
