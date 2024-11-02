@@ -8,6 +8,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service:
+          - User
 
     steps:
     - uses: actions/checkout@v4
@@ -22,4 +26,4 @@ jobs:
       working-directory: User
 
     - name: Test units
-      run: mvn test
+      run: mvn test --file "${{ matrix.service}}/pom.xml"
