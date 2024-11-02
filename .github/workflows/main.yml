@@ -22,4 +22,4 @@ jobs:
       working-directory: User
 
     - name: Test units
-      run: mvn test --file pom.xml
+      run: mvn test
