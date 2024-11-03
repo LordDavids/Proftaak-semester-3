@@ -23,7 +23,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Clean, compile, and run tests
+#    - name: Clean, compile, and run tests
+ #     run: mvn -B clean verify --file "${{ matrix.api }}/pom.xml"
+    - name: Clean, compile, and run service tests
       run: mvn -B clean verify -Dtest=com.api.user.service.* --file "${{ matrix.api }}/pom.xml"
 
     - name: Build application
