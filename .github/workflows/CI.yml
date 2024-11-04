@@ -6,6 +6,24 @@ on:
       - main
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Super-linter
+        uses: super-linter/super-linter@v7.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LANGUAGE: "java,javascript,typescript,xml"
+          VALIDATE_ALL_CODEBASE: true
+          VALIDATE_JAVA: true
+          VALIDATE_GITLEAKS: true
+          
   build:
     runs-on: ubuntu-latest
     strategy:
@@ -25,7 +43,6 @@ jobs:
 
     - name: Clean, compile, and run tests
       run: mvn -B clean verify --file "${{ matrix.api }}/pom.xml"
-
-
+      
     - name: Build application
       run: mvn -B clean package --file "${{ matrix.api }}/pom.xml"
