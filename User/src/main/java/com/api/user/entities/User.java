@@ -38,16 +38,16 @@ public class User {
 
     public User() {}
 
-    public User(Long id, String first_name, String lastname, String email, String password) {
+    public User(Long id, String first_Name, String last_Name, String email, String password) {
         this.id = id;
-        this.first_name = first_name;
-        this.lastname = lastname;
+        this.first_name = first_Name;
+        this.lastname = last_Name;
         this.email = email;
         this.password = password;
     }
-    public User(String first_name, String lastname, String email, String password, Role role) {
-        this.first_name = first_name;
-        this.lastname = lastname;
+    public User(String first_Name, String last_Name, String email, String password, Role role) {
+        this.first_name = first_Name;
+        this.lastname = last_Name;
         this.email = email;
         this.password = password;
         this.role = role;

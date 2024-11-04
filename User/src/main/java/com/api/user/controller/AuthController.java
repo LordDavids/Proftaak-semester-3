@@ -23,8 +23,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<Auth> register(
         @RequestBody RegisterRequestDTO request
-    )
-    {
+    ){
         AuthenticationResponseDTO response = authenticationService.register(request);
         ResponseCookie cookie = ResponseCookie.from("JWT", response.getToken())
                 .httpOnly(true)
@@ -37,7 +36,6 @@ public class AuthController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, cookie.toString())
                 .body(new Auth(response));
-
     }
 
     @PostMapping("/authenticate")
@@ -56,7 +54,6 @@ public class AuthController {
             return ResponseEntity.ok()
                     .header(HttpHeaders.SET_COOKIE, cookie.toString())
                     .body(new Auth(response));
-
     }
 
     @PostMapping("/logout")

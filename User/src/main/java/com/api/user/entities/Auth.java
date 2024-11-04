@@ -3,7 +3,6 @@ package com.api.user.entities;
 import com.api.user.dto.AuthenticationResponseDTO;
 import lombok.Getter;
 import lombok.Setter;
-import java.util.List;
 
 
 @Getter
