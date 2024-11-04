@@ -1,7 +1,7 @@
 package com.api.user.exeptions;
 
-public class invalidCredentialsException extends RuntimeException {
-  public invalidCredentialsException(String message) {
+public class InvalidCredentialsException extends RuntimeException {
+  public InvalidCredentialsException(String message) {
     super(message);
   }
 }

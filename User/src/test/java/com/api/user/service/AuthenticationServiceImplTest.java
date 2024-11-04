@@ -3,7 +3,7 @@ package com.api.user.service;
 import com.api.user.dto.AuthenticationResponseDTO;
 import com.api.user.dto.RegisterRequestDTO;
 import com.api.user.entities.User;
-import com.api.user.exeptions.userAlreadyExistsException;
+import com.api.user.exeptions.UserAlreadyExistsException;
 import com.api.user.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -54,7 +54,7 @@ public class AuthenticationServiceImplTest {
             return savedUser; // Return the modified User
         });
 
-        doReturn("jwtToken").when(jwtServiceImpl).GenerateToken(anyMap(), anyLong());
+        doReturn("jwtToken").when(jwtServiceImpl).generateToken(anyMap(), anyLong());
         // Act
         AuthenticationResponseDTO response = authenticationServiceImpl.register(registerRequestDTO);
         // Assert
@@ -84,7 +84,7 @@ public class AuthenticationServiceImplTest {
 
         // Act & Assert //
         // Assert that the exception is thrown and the message is correct
-        userAlreadyExistsException exception = assertThrows(userAlreadyExistsException.class, () -> {
+        UserAlreadyExistsException exception = assertThrows(UserAlreadyExistsException.class, () -> {
             authenticationServiceImpl.register(registerRequestDTO);
         });
         assertEquals("User with this email already exists", exception.getMessage());

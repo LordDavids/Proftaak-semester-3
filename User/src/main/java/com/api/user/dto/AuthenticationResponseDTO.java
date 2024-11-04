@@ -14,7 +14,7 @@ public class AuthenticationResponseDTO{
         private String email;
         private Role role;
 
-        public AuthenticationResponseDTO (String jwtToken, String firstName, String lastName, String email, Role role) {
+        public AuthenticationResponseDTO(String jwtToken, String firstName, String lastName, String email, Role role) {
                 this.token = jwtToken;
                 this.firstName = firstName;
                 this.lastName = lastName;

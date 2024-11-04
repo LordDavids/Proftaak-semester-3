@@ -1,6 +1,6 @@
 package com.api.user.filter;
 
-import com.api.user.entities.jwtUser;
+import com.api.user.entities.JwtUser;
 import com.api.user.service.JwtServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -43,7 +43,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (SecurityContextHolder.getContext().getAuthentication() == null) {
 
             if (jwtServiceImpl.validateToken(token)) {
-                jwtUser user = jwtServiceImpl.getUserFromToken(token);
+                JwtUser user = jwtServiceImpl.getUserFromToken(token);
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(
                                 user,

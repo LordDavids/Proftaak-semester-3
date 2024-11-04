@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class jwtUser {
+public class JwtUser {
     private Long id;
     private String role;
 

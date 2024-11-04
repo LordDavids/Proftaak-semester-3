@@ -13,8 +13,8 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExeptionHandler extends RuntimeException {
 
-    @ExceptionHandler(invalidCredentialsException.class)
-    public ResponseEntity<?> handleUserNotFoundException(invalidCredentialsException ex, WebRequest request) {
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<?> handleUserNotFoundException(InvalidCredentialsException ex, WebRequest request) {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.UNAUTHORIZED.value());
@@ -25,8 +25,8 @@ public class GlobalExeptionHandler extends RuntimeException {
         return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
     }
 
-    @ExceptionHandler(userAlreadyExistsException.class)
-    public ResponseEntity<?> handleInvalidUserException(userAlreadyExistsException ex, WebRequest request) {
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<?> handleInvalidUserException(UserAlreadyExistsException ex, WebRequest request) {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.CONFLICT.value());

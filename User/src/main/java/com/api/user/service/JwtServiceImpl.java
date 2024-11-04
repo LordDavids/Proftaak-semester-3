@@ -1,6 +1,6 @@
 package com.api.user.service;
 
-import com.api.user.entities.jwtUser;
+import com.api.user.entities.JwtUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -20,8 +20,8 @@ public class JwtServiceImpl implements JwtService {
 
     private final SecretKey secretKey;
 
-    public JwtServiceImpl(@Value("${security.jwt.secret-key}")String _base64SecretKey) {
-        byte[] keyBytes = Base64.getDecoder().decode(_base64SecretKey);
+    public JwtServiceImpl(@Value("${security.jwt.secret-key}")String base64SecretKey) {
+        byte[] keyBytes = Base64.getDecoder().decode(base64SecretKey);
         this.secretKey = Keys.hmacShaKeyFor(keyBytes);
     }
 
@@ -40,8 +40,8 @@ public class JwtServiceImpl implements JwtService {
                 .before(new Date());
     }
 
-    public jwtUser getUserFromToken(String token) {
-        jwtUser user = new jwtUser();
+    public JwtUser getUserFromToken(String token) {
+        JwtUser user = new JwtUser();
         user.setId(Long.parseLong(getIdFromToken(token)));
         user.setRole(getRoleFromToken(token));
         return user;
@@ -68,7 +68,7 @@ public class JwtServiceImpl implements JwtService {
     }
 
 
-    public String GenerateToken(Map<String, Object> claims, Long id) {
+    public String generateToken(Map<String, Object> claims, Long id) {
             return Jwts
                     .builder()
                     .claims(claims)
