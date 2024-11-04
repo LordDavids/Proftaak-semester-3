@@ -18,6 +18,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           LANGUAGE: "java,javascript,typescript,xml"
+          JAVA_FILE_NAME: checkstyle.xml
           VALIDATE_ALL_CODEBASE: true
           VALIDATE_JAVA: true
           VALIDATE_GITLEAKS: true
