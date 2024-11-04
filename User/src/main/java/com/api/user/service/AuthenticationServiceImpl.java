@@ -27,7 +27,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final JwtServiceImpl jwtServiceImpl;
 
 
-    AuthenticationServiceImpl (UserRepository userRepository, JwtServiceImpl jwtServiceImpl) {
+    AuthenticationServiceImpl(UserRepository userRepository, JwtServiceImpl jwtServiceImpl) {
         this.userRepository = userRepository;
         this.passwordEncoder = new BCryptPasswordEncoder(12);
         this.jwtServiceImpl = jwtServiceImpl;
