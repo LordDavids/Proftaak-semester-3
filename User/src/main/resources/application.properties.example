@@ -1,0 +1,18 @@
+spring.application.name=
+
+
+spring.jpa.hibernate.ddl-auto=
+spring.datasource.url=jdbc:
+spring.datasource.username=
+spring.datasource.password=
+spring.datasource.driver-class-name=
+spring.jpa.show-sql: true
+
+security.jwt.secret-key=
+security.jwt.expiration-time=
+
+security.pepper=
+
+cors.origin=
+
+
