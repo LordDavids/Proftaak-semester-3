@@ -69,9 +69,9 @@ jobs:
       # Build Docker Image based on matrix 'api'
       - name: Build Docker image for ${{ matrix.api }}
         run: |
-          docker build ./${{ matrix.api }} -t davidsteile/fontys_solutions/:latest 
+          docker build ./${{ matrix.api }} -t davidsteile/fontys_solutions:v1
           
       # Push the Docker image to Docker Hub
       - name: Push Docker image to Docker Hub
         run: |
-          docker push davidsteile/fontys_solutions/:latest
+          docker push davidsteile/fontys_solutions:v1
