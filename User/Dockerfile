@@ -1,9 +1,8 @@
 FROM openjdk:22-jdk-slim
 
-WORKDIR /app
+COPY ./target/User-0.0.1-SNAPSHOT.jar /app/app.jar
 
-# Copy the JAR file to the container
-COPY target/User-0.0.1-SNAPSHOT.jar app.jar
+WORKDIR /app
 
 # Run the application
 CMD ["java", "-jar", "app.jar"]
