@@ -73,6 +73,6 @@ jobs:
           docker build ./${{ matrix.api }} -t davidsteile/fontys_solutions:v1
           
       # Push the Docker image to Docker Hub
-      - name: Push Docker image to Docker Hub
-        run: |
-          docker push davidsteile/fontys_solutions:v1
+     # - name: Push Docker image to Docker Hub
+      #  run: |
+       #   docker push davidsteile/fontys_solutions:v1
