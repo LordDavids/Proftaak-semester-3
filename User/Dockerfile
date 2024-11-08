@@ -1,5 +1,5 @@
 # build the maven project
-FROM maven:3.9.4-eclipse-temurin-22 AS build
+FROM maven:3.9.4-openjdk-22 AS build
 
 COPY pom.xml .
 COPY src src
