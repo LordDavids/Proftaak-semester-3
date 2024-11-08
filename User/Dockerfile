@@ -1,5 +1,5 @@
 # Build stage
-FROM openjdk:22-jdk AS build
+FROM maven:3.8.6-openjdk-22 AS build
 
 WORKDIR /app
 
