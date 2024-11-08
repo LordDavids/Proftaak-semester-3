@@ -47,6 +47,16 @@ jobs:
     - name: Build application
       run: mvn -B clean package --file "${{ matrix.api }}/pom.xml"
 
+            # Check if JAR file was created
+    - name: Verify JAR file exists
+      run: |
+          if [ ! -f "${{ matrix.api }}/target/${{ matrix.api }}-0.0.1-SNAPSHOT.jar" ]; then
+            echo "JAR file not found!"
+            exit 1
+          else
+            echo "JAR file exists."
+          fi
+
   docker:
     needs: build
     runs-on: ubuntu-latest
