@@ -1,9 +1,10 @@
 # build the maven project
-FROM openjdk:21-jdk
+FROM openjdk:22-jdk
 
 COPY pom.xml .
 COPY src src
 
+RUN chmod +x ./mvn
 # Run the build command
 RUN mvn clean package -DskipTests
 
