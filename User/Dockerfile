@@ -1,5 +1,5 @@
 # build the maven project
-FROM openjdk:22-jdk-slim
+FROM openjdk:21-jdk
 
 COPY pom.xml .
 COPY src src
