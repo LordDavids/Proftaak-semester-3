@@ -56,16 +56,7 @@ jobs:
         api:
           - User  
         
-    steps:
-      - name: Verify JAR file exists
-        run: |
-          if [ ! -f "${{ matrix.api }}/target/${{ matrix.api }}-0.0.1-SNAPSHOT.jar" ]; then
-            echo "JAR file not found!"
-            exit 1
-          else
-            echo "JAR file exists."
-          fi
-    
+    steps:    
       - name: Check out the code
         uses: actions/checkout@v4
 
