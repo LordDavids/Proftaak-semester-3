@@ -28,8 +28,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        api:
+        api: 
           - User
+        environment: 
+          - user_api
+        include:
+          - api: User
+            environment: user_api
 
     steps:
     - uses: actions/checkout@v4
