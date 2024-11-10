@@ -18,5 +18,7 @@ COPY --from=build /app/target/User-0.0.1-SNAPSHOT.jar /app/app.jar
 
 WORKDIR /app
 
+EXPOSE 8080
+
 # Run the application
 CMD ["java", "-jar", "app.jar"]
