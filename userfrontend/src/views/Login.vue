@@ -2,7 +2,9 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router';
 import user from "../userStorage.ts";
-import {api} from "/src/services/apiClient.ts";
+import {api} from "../services/apiClient.ts";
+import { User } from "../enteties/User.ts"
+
 
 const email = ref('')
 const password = ref('')
@@ -13,14 +15,14 @@ const router = useRouter(); // Initialize the router
 const handleLogin = async() => {
   errorMessage.value = ""
   // Send the email and password to the server
-  api.post<user>("/auth/authenticate", {
+  api.post<User>("/auth/authenticate", {
     email: email.value,
     password: password.value,
-  }).then((response) => {
+  }).then((response: any) => {
     user.value = response.data;
     // Redirect the user to the home page
     router.push("/");
-  }).catch((error) => {
+  }).catch((error: any) => {
     if (!error?.response?.data) {
       console.error(error);
       errorMessage.value = "An unknown error occurred. Please try again later.";

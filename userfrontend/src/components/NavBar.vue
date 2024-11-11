@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import user from "../userStorage.ts";
 import router from "../router/router.ts";
-import {api} from "/src/services/apiClient.ts";
+import {api} from "../services/apiClient.ts";
 
 const isMenuOpen = ref(false);
 

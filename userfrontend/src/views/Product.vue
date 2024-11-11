@@ -12,7 +12,7 @@ const demoAccess = async() => {
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json'
     }
-  }).then((response) => {
+  }).then(() => {
     message.value = "hello";
   }).catch((err) => {
     console.log(err);
