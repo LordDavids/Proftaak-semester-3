@@ -1,0 +1,35 @@
+name: Docker Image Build and Push
+
+on:
+  workflow_run:
+    workflows: ["CI"]  # The name main CI workflow
+    types:
+      - completed
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        api:
+          - User
+        
+    steps:    
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_NAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      # Build Docker Image based on matrix 'api'
+      - name: Build Docker image for ${{ matrix.api }}
+        run: |
+          docker build ./${{ matrix.api }} -t davidsteile/fontys_solutions:v1
+          
+      # Push the Docker image to Docker Hub
+      - name: Push Docker image to Docker Hub
+        run: |
+          docker push davidsteile/fontys_solutions:v1
