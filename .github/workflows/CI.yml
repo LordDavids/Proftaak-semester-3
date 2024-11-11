@@ -29,11 +29,11 @@ jobs:
     strategy:
       matrix:
         api: 
-          - User
+          - user
         environment: 
           - user_api
         include:
-          - api: User
+          - api: user
             environment: user_api
 
     steps:

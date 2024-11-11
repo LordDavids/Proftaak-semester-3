@@ -5,16 +5,15 @@ on:
     workflows: ["CI Fontys_solutions"]  # The name main CI workflow
     types:
       - completed
-    branches:
-      - main
 
 jobs:
   docker:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         api:
-          - User
+          - user
           - userfrontend
         
     steps:    
