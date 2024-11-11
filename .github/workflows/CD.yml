@@ -15,6 +15,7 @@ jobs:
       matrix:
         api:
           - User
+          - userfrontend
         
     steps:    
       - name: Check out the code
@@ -30,6 +31,7 @@ jobs:
       - name: Build Docker image for ${{ matrix.api }}
         run: |
           docker build ./${{ matrix.api }} -t davidsteile/fontys_solutions:v1
+          docker build ./${{ matrix.api }} -t davidsteile/${{ matrix.api }}:latest
           
       # Push the Docker image to Docker Hub
       - name: Push Docker image to Docker Hub
