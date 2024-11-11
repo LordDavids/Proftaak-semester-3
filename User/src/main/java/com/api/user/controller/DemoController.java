@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoController {
     @GetMapping
     public ResponseEntity<String> demo() {
-        String hallo = "Hallo";
+        String hallo = "Hallo voor docker auto update";
 
         return ResponseEntity.ok(hallo);
     }
