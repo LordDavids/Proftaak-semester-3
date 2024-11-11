@@ -2,9 +2,11 @@ name: Docker Image Build and Push
 
 on:
   workflow_run:
-    workflows: ["CI"]  # The name main CI workflow
+    workflows: ["CI Fontys_solutions"]  # The name main CI workflow
     types:
       - completed
+    branches:
+      - main
 
 jobs:
   docker:

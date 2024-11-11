@@ -1,4 +1,4 @@
-name: CI for Fontys_solutions userapi
+name: CI Fontys_solutions 
 
 on:
   push:
