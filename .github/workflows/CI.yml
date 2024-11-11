@@ -24,7 +24,7 @@ jobs:
           VALIDATE_JAVA: true
           VALIDATE_GITLEAKS: true
           
-  build:
+  build-java-backend:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -52,4 +52,32 @@ jobs:
     - name: Build application
       run: mvn -B clean package --file "${{ matrix.api }}/pom.xml"
 
-            # Check if JAR file was created
+  build-springboot-front:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        front-end:
+          - userfrontend
+
+    steps:
+      # Check out the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Set up Node.js to the required version (adjust the version as needed)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'  # Choose a compatible version
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci --prefix userfrontend/
+
+      # Optionally run tests (if you have them configured)
+      #- name: Run tests
+       # run: npm test
+
+      # Build the project
+      - name: Build project
+        run: npm run build --prefix userfrontend/
