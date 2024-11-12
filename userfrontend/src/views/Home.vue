@@ -4,7 +4,7 @@
 
 <template>
   <div class="custom-background">
-    <h1 class="text-white">Home screen test</h1>
+    <h1 class="text-white">Home screen test 12-11-18-10</h1>
   </div>
   <div class="custom-container">
     hello 12-11
