@@ -237,5 +237,6 @@ yarn-error.log
 
 authentication.http
 .authentication.http
+.env.development
 
 # End of https://www.toptal.com/developers/gitignore/api/java,vuejs,vue,webstorm,intellij+all,visualstudiocode

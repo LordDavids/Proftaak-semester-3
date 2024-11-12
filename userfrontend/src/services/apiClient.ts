@@ -4,7 +4,7 @@ import router from "../router/router.ts";
 
 // Create an instance of Axios with the base URL
 export const api = axios.create({
-    baseURL: 'http://localhost:8080/api',  // Use the .env variable for the base URL
+    baseURL: import.meta.env.VITE_API_USER,
     withCredentials: true,
 });
 
