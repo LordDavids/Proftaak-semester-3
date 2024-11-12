@@ -13,6 +13,9 @@ COPY package*.json ./
 # Install project dependencies
 RUN npm install
 
+# Copy .env.production file
+COPY .env.production .env.production
+
 # Copy project files and folders to the current working directory (i.e., 'app' folder)
 COPY . .
 
