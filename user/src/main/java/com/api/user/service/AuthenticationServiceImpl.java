@@ -39,7 +39,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                     requestDTO.lastname(),
                     requestDTO.email().toLowerCase(),
                     encodePassword(requestDTO.password()),
-                    new Role("USER", 1));
+                    new Role("USER", 1)
+                    , requestDTO.phone_number());
             userRepository.save(user);
             var claims = new HashMap<String, Object>();
             claims.put("roles", user.getRole().getName());
@@ -49,7 +50,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                     user.getFirst_name(),
                     user.getLastname(),
                     user.getEmail(),
-                    user.getRole()
+                    user.getRole(),
+                    user.getPhoneNumber()
             );
         } catch (DataIntegrityViolationException ex) {
             throw new UserAlreadyExistsException("User with this email already exists");
@@ -70,7 +72,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                     user.getFirst_name(),
                     user.getLastname(),
                     user.getEmail(),
-                    user.getRole()
+                    user.getRole(),
+                    user.getPhoneNumber()
             );
         }
         throw new InvalidCredentialsException("invalid credentials");

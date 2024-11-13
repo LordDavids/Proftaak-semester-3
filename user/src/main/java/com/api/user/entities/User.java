@@ -31,26 +31,30 @@ public class User {
     @Setter
     @Column(nullable = false)
     private String password;
-
+    @Setter
+    @Column(nullable = false, length = 25)
+    private String phoneNumber;
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
     public User() {}
 
-    public User(Long id, String firstName, String lastname, String email, String password) {
+    public User(Long id, String firstName, String lastname, String email, String password,String phoneNumber) {
         this.id = id;
         this.first_name = firstName;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
+        this.phoneNumber = phoneNumber;
     }
-    public User(String firstName, String lastname, String email, String password, Role role) {
+    public User(String firstName, String lastname, String email, String password, Role role, String phoneNumber) {
         this.first_name = firstName;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.phoneNumber = phoneNumber;
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
