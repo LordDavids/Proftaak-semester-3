@@ -28,5 +28,5 @@ RUN mkdir -p dist
 # Expose the port that the HTTP server will run on
 EXPOSE 5173
 
-# Start the HTTP server and serve files from the 'dist' directory
-CMD ["http-server", "dist", "-p", "5173", "-b"]
+# Start the HTTP server and serve files from the 'dist' directory, with --pushState to handle client-side routing
+CMD ["npx", "http-server", "dist", "-p", "5173", "--pushState"]
