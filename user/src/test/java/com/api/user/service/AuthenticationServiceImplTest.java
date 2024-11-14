@@ -46,7 +46,8 @@ public class AuthenticationServiceImplTest {
                 "john",
                 "Dou",
                 "jhondou@gmail.com",
-                "123456");
+                "123456",
+                "1234567890");
 
         when(userRepository.save(any(User.class))).thenAnswer(invocation -> {
             User savedUser = invocation.getArgument(0); // Get the User passed to save
@@ -78,7 +79,8 @@ public class AuthenticationServiceImplTest {
                 "john",
                 "Dou",
                 "jhondou@gmail.com",
-                "123456");
+                "123456",
+                "1234567890");
 
         when(userRepository.save(any(User.class))).thenThrow(DataIntegrityViolationException.class);
 
