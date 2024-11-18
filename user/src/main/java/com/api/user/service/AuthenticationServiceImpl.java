@@ -4,6 +4,7 @@ import com.api.user.dto.AuthenticationRequestDTO;
 import com.api.user.dto.AuthenticationResponseDTO;
 import com.api.user.dto.RegisterRequestDTO;
 import com.api.user.exeptions.InvalidCredentialsException;
+import com.api.user.exeptions.MissingFieldException;
 import com.api.user.exeptions.UserAlreadyExistsException;
 import com.api.user.entities.Role;
 import com.api.user.repository.UserRepository;
@@ -34,7 +35,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     public AuthenticationResponseDTO register(RegisterRequestDTO requestDTO) {
-        try {
+            if (requestDTO.first_name() == null || requestDTO.lastname() == null || requestDTO.email().isEmpty() || requestDTO.phone_number() == null) {
+                throw new MissingFieldException("Please check if you filled in all required fields");
+            }
+
+            if (userRepository.existsByEmail(requestDTO.email().toLowerCase())) {
+                throw new UserAlreadyExistsException("User with this email already exists");
+            }
             var user = new User(requestDTO.first_name(),
                     requestDTO.lastname(),
                     requestDTO.email().toLowerCase(),
@@ -53,10 +60,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                     user.getRole(),
                     user.getPhoneNumber()
             );
-        } catch (DataIntegrityViolationException ex) {
-            throw new UserAlreadyExistsException("User with this email already exists");
-        }
-
     }
 
     public AuthenticationResponseDTO authenticate(AuthenticationRequestDTO requestDTO) {

@@ -5,6 +5,7 @@ import com.api.user.dto.AuthenticationResponseDTO;
 import com.api.user.entities.Auth;
 import com.api.user.service.AuthenticationService;
 import com.api.user.dto.RegisterRequestDTO;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<Auth> register(
-        @RequestBody RegisterRequestDTO request
+        @Valid @RequestBody RegisterRequestDTO request
     ){
         AuthenticationResponseDTO response = authenticationService.register(request);
         ResponseCookie cookie = ResponseCookie.from("JWT", response.getToken())
