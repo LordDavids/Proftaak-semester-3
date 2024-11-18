@@ -33,8 +33,8 @@ public class SecurityConfiguration {
         http
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                       // .requestMatchers("/").permitAll()  // Allow unauthenticated access to specific endpoints
-                        .requestMatchers("/api/demo").hasRole("ADMIN")
+                        .requestMatchers("/api/product").permitAll()  // Allow unauthenticated access to specific endpoints
+                        .requestMatchers("/api/product/demo").hasRole("ADMIN")
                         .anyRequest().authenticated()               // All other endpoints require authentication
                 )
                 .csrf(AbstractHttpConfigurer::disable)  // Using the Customizer approach to disable CSRF

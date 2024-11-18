@@ -15,9 +15,6 @@ import java.util.Date;
 @Service
 public class JwtServiceImpl implements JwtService {
 
-    @Value("${security.jwt.expiration-time}")
-    private long jwtExpiration;
-
     private final SecretKey secretKey;
 
     public JwtServiceImpl(@Value("${security.jwt.secret-key}")String base64SecretKey) {
