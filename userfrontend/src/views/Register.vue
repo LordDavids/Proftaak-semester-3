@@ -22,14 +22,14 @@ const handleRegister = async () => {
     errorMessage.value = 'Passwords do not match!';
     return;
   }
-
+  console.log(firstName.value, lastName.value, email.value, password.value, phoneNumber.value);
   // Send the registration details to the server
   api.post<User>('/auth/register', {
     first_name: firstName.value,
-    last_name: lastName.value,
+    lastname: lastName.value,
     email: email.value,
     password: password.value,
-    phone_number: phoneNumber.value,
+    phone_number: phoneNumber.value
   })
       .then((response: any) => {
         user.value = response.data; // Store user data after registration
@@ -70,6 +70,8 @@ const handleRegister = async () => {
               required
               class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your first name"
+              minlength="1"
+              maxlength="255"
           />
         </div>
 
@@ -83,6 +85,8 @@ const handleRegister = async () => {
               required
               class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your last name"
+              minlength="1"
+              maxlength="255"
           />
         </div>
 
@@ -96,6 +100,8 @@ const handleRegister = async () => {
               required
               class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your email"
+              minlength="4"
+              maxlength="320"
           />
         </div>
 
@@ -109,6 +115,7 @@ const handleRegister = async () => {
               required
               class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your password"
+              minlength="6"
           />
         </div>
 
@@ -122,6 +129,7 @@ const handleRegister = async () => {
               required
               class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Confirm your password"
+              minlength="6"
           />
         </div>
 
@@ -135,6 +143,7 @@ const handleRegister = async () => {
               required
               class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your phone number"
+              minlength="6"
           />
         </div>
 
