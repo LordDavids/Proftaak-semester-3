@@ -1,4 +1,11 @@
 package com.api.productapi.service;
 
-public class CategoryService {
+
+import com.api.productapi.entities.Category;
+
+import java.util.List;
+
+public interface CategoryService {
+
+    List<Category> getAllCategories();
 }

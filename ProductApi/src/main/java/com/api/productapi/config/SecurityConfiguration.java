@@ -33,7 +33,8 @@ public class SecurityConfiguration {
         http
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/product").permitAll()  // Allow unauthenticated access to specific endpoints
+                        .requestMatchers("/api/product").permitAll()
+                        .requestMatchers("/api/category").permitAll()// Allow unauthenticated access to specific endpoints
                         .requestMatchers("/api/product/demo").hasRole("ADMIN")
                         .anyRequest().authenticated()               // All other endpoints require authentication
                 )
