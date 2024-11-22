@@ -82,7 +82,7 @@ public class AuthenticationServiceImplTest {
                 "123456",
                 "1234567890");
 
-        when(userRepository.save(any(User.class))).thenThrow(DataIntegrityViolationException.class);
+        when(userRepository.existsByEmail(anyString())).thenReturn(true);
 
         // Act & Assert //
         // Assert that the exception is thrown and the message is correct

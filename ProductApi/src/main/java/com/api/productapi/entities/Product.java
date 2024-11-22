@@ -32,8 +32,8 @@ public class Product {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    public Product() {
-    }
+    public Product() {}
+
     public Product(Integer id, String name, int articleNumber, BigDecimal price, String description, Boolean active, int stock, Category category) {
         this.id = id;
         this.name = name;
@@ -44,5 +44,4 @@ public class Product {
         this.stock = stock;
         this.category = category;
     }
-
 }

@@ -1,8 +1,8 @@
 package com.api.productapi.controller;
 import com.api.productapi.dto.ProductPageDTO;
 import com.api.productapi.service.ProductService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +21,9 @@ public class ProductController {
     }
 
     @GetMapping("")
-    public ResponseEntity<ProductPageDTO> GetProducts(@RequestParam int categoryId
-                                                        ,@RequestParam int page,
-                                                        @RequestParam int size) throws InterruptedException {
+    public ResponseEntity<ProductPageDTO> getProducts(@RequestParam int categoryId
+                                                        , @RequestParam int page,
+                                                      @RequestParam int size) throws InterruptedException {
 //        logger.info("Request started. Category ID: {}", categoryId);
 //        Thread.sleep(10000);  // Sleep for 10 seconds
         ProductPageDTO productPageDTO = productService.getProductsByCategoryId(categoryId, page, size);
