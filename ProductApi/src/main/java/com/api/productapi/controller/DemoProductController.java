@@ -14,6 +14,6 @@ public class DemoProductController {
     @GetMapping
     public ResponseEntity<String> demo() {
         String hallo = "test voor product api ";
-        return ResponseEntity.ok(hallo );
+        return ResponseEntity.ok(hallo);
     }
 }

@@ -10,25 +10,26 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 public class ProductApiApplication {
 
-	@Value("${cors.origin}")
-	private String corsOrigin;
+    @Value("${cors.origin}")
+    private String corsOrigin;
 
-	public static void main(String[] args) {
-		SpringApplication.run(ProductApiApplication.class, args);
-	}
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
+    public static void main(String[] args) {
+        SpringApplication.run(ProductApiApplication.class, args);
+    }
 
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**")
-						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-						.allowedHeaders("*")
-						.exposedHeaders("*")
-						.allowedOrigins(corsOrigin)
-						.allowCredentials(true);
-			}
-		};
-	}
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*")
+                        .exposedHeaders("*")
+                        .allowedOrigins(corsOrigin)
+                        .allowCredentials(true);
+            }
+        };
+    }
 }

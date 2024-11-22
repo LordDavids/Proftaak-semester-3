@@ -2,7 +2,6 @@ package com.api.user.exeptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,7 +10,6 @@ import org.springframework.web.context.request.WebRequest;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @ControllerAdvice
 public class GlobalExeptionHandler extends RuntimeException {
@@ -39,7 +37,6 @@ public class GlobalExeptionHandler extends RuntimeException {
 
         return new ResponseEntity<>(body, HttpStatus.CONFLICT);
     }
-
 
     // Handle Missing Required Fields (Optional)
     @ExceptionHandler(MissingFieldException.class)

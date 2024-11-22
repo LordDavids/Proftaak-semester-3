@@ -1,7 +1,6 @@
 package com.api.productapi.service;
 
 import com.api.productapi.dto.ProductPageDTO;
-import org.springframework.stereotype.Service;
 
 public interface ProductService {
 
