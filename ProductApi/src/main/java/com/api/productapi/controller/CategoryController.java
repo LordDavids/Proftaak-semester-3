@@ -12,8 +12,8 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    public CategoryController(CategoryService CategoryService) {
-        this.categoryService = CategoryService;
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 
     @GetMapping

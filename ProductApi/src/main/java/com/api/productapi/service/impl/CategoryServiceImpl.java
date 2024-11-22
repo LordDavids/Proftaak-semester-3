@@ -12,8 +12,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-    public CategoryServiceImpl(CategoryRepository CategoryRepository) {
-        this.categoryRepository = CategoryRepository;
+    public CategoryServiceImpl(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
     }
 
     public List<Category> getAllCategories() {
