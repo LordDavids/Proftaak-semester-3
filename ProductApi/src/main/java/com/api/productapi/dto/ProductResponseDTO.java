@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 public class ProductResponseDTO {
     private Integer id;
     private String name;
-    private int articleNumber;
+    private long articleNumber;
     private BigDecimal price;
     private String description;
     private Boolean active;

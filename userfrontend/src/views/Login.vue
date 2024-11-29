@@ -5,7 +5,6 @@ import user from "../userStorage.ts";
 import {api} from "../services/apiClient.ts";
 import { User } from "../enteties/User.ts"
 
-
 const email = ref('')
 const password = ref('')
 const errorMessage = ref("")
@@ -15,7 +14,7 @@ const router = useRouter(); // Initialize the router
 const handleLogin = async() => {
   errorMessage.value = ""
   // Send the email and password to the server
-  api.post<User>("/auth/authenticate", {
+  api.post<User>(import.meta.env.VITE_API_USER + "/auth/authenticate", {
     email: email.value,
     password: password.value,
   }).then((response: any) => {

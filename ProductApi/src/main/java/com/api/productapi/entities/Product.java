@@ -20,11 +20,11 @@ public class Product {
     private Integer id;
     @Column(nullable = false, unique = true)
     private String name;
-    @Column(nullable = false)
-    private int articleNumber;
+    @Column(name = "articlenumber",nullable = false)
+    private long articleNumber;
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
-    @Column(length = 200)
+    @Column(name = "decription", length = 200)
     private String description;
     @Column(nullable = false)
     private Boolean active;

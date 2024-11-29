@@ -20,6 +20,7 @@ public class ProductController {
         this.productService = productService;
     }
 
+    // Get products product list by category ID for product select page
     @GetMapping("")
     public ResponseEntity<ProductPageDTO> getProducts(@RequestParam int categoryId
                                                         , @RequestParam int page,

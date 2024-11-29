@@ -24,7 +24,7 @@ const handleRegister = async () => {
   }
   console.log(firstName.value, lastName.value, email.value, password.value, phoneNumber.value);
   // Send the registration details to the server
-  api.post<User>('/auth/register', {
+  api.post<User>(import.meta.env.VITE_API_USER + '/auth/register', {
     first_name: firstName.value,
     lastname: lastName.value,
     email: email.value,
