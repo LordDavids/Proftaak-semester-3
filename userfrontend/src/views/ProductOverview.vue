@@ -26,7 +26,8 @@ const GetProducts = async() => {
       id: item.id,
       name: item.name,
       category: item.category,
-      price: item.price
+      price: item.price,
+      stock: item.stock
     }));
     console.log(products.value);
   }).catch((error) => {
@@ -47,12 +48,11 @@ const filters = ref({
 const filteredProducts = computed(() => {
   return products.value.filter((product) => {
     const matchesName = product.name.toLowerCase().includes(filters.value.name.toLowerCase());
-    const matchesCategory = !filters.value.category || product.category.name === filters.value.category;
     const matchesPrice =
         (!filters.value.minPrice || product.price >= filters.value.minPrice) &&
         (!filters.value.maxPrice || product.price <= filters.value.maxPrice);
 
-    return matchesName && matchesCategory && matchesPrice;
+    return matchesName && matchesPrice;
   });
 });
 
@@ -71,43 +71,33 @@ onMounted(GetProducts);
 
 <template>
   <div class="container mx-auto p-6">
-<!--    <div class="flex justify-between items-center mb-6">-->
-<!--      <div class="flex space-x-4">-->
-<!--        &lt;!&ndash; Name filter input &ndash;&gt;-->
-<!--        <input-->
-<!--            v-model="filters.name"-->
-<!--            type="text"-->
-<!--            class="border rounded px-4 py-2"-->
-<!--            placeholder="Search by name"-->
-<!--        />-->
-<!--        &lt;!&ndash; Price range filter &ndash;&gt;-->
-<!--        <div class="flex space-x-2">-->
-<!--          <input-->
-<!--              v-model.number="filters.minPrice"-->
-<!--              type="number"-->
-<!--              class="border rounded px-4 py-2"-->
-<!--              placeholder="Min price"-->
-<!--          />-->
-<!--          <input-->
-<!--              v-model.number="filters.maxPrice"-->
-<!--              type="number"-->
-<!--              class="border rounded px-4 py-2"-->
-<!--              placeholder="Max price"-->
-<!--          />-->
-<!--        </div>-->
-<!--      </div>-->
+    <div class="flex justify-between items-center mb-6">
+      <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
+        <!-- Name filter input -->
+        <input
+            v-model="filters.name"
+            type="text"
+            class="border rounded px-4 py-2 w-full sm:w-auto"
+            placeholder="Search by name"
+        />
+        <!-- Price range filter -->
+        <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+          <input
+              v-model.number="filters.minPrice"
+              type="number"
+              class="border rounded px-4 py-2 w-full sm:w-auto"
+              placeholder="Min price"
+          />
+          <input
+              v-model.number="filters.maxPrice"
+              type="number"
+              class="border rounded px-4 py-2 w-full sm:w-auto"
+              placeholder="Max price"
+          />
+        </div>
+      </div>
 
-<!--      &lt;!&ndash; Category dropdown filter &ndash;&gt;-->
-<!--      <select-->
-<!--          v-model="filters.category"-->
-<!--          class="border rounded px-4 py-2"-->
-<!--      >-->
-<!--        <option value="">All Categories</option>-->
-<!--        <option v-for="category in categories" :key="category.id" :value="category.name">-->
-<!--          {{ category.name }}-->
-<!--        </option>-->
-<!--      </select>-->
-<!--    </div>-->
+    </div>
 
     <div class="grid grid-cols-1 xsm:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6 CustomProductCardSize ">
       <!-- Product Cards -->
