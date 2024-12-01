@@ -24,7 +24,7 @@ public class Product {
     private long articleNumber;
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
-    @Column(name = "decription", length = 200)
+    @Column(name = "decription", length = 300)
     private String description;
     @Column(nullable = false)
     private Boolean active;

@@ -8,20 +8,22 @@ import {useRoute} from "vue-router";
 
 const route = useRoute(); // Initialize the router
 
+
 const products = ref<Product[]>([]);
 const categoryId = ref<string>(route.params.id);
-const pageNumber = 0;
-const pageSize = 10;
+const pageSize = ref<number>(6);
+const pageNumber = ref<number>(0);  // Track the current page number
+const TotalElements = ref<number>();
 
 
 const GetProducts = async() => {
-  api.get(import.meta.env.VITE_API_PRODUCT +`/product?categoryId=${categoryId.value}&page=${pageNumber}&size=${pageSize}`, {}, {
+  api.get(import.meta.env.VITE_API_PRODUCT +`/product/${categoryId.value}/${pageNumber.value}/${pageSize.value}`, {}, {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json'
     }
   }).then((response) => {
-    console.log(response.data.products);
+      console.log(response.data);
     products.value = response.data.products.map((item: any) => ({
       id: item.id,
       name: item.name,
@@ -29,11 +31,15 @@ const GetProducts = async() => {
       price: item.price,
       stock: item.stock
     }));
-    console.log(products.value);
+    TotalElements.value = response.data.totalElements;
   }).catch((error) => {
     console.log(error);
     router.push("/error");
   })
+}
+const moreProducts = () => {
+  pageSize.value = pageSize.value + 6;
+  GetProducts();
 }
 
 // Filters state
@@ -71,7 +77,7 @@ onMounted(GetProducts);
 
 <template>
   <div class="container mx-auto p-6">
-    <div class="flex justify-between items-center mb-6">
+    <div class="flex justify-center items-center mb-6">
       <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
         <!-- Name filter input -->
         <input
@@ -96,15 +102,15 @@ onMounted(GetProducts);
           />
         </div>
       </div>
-
     </div>
 
     <div class="grid grid-cols-1 xsm:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6 CustomProductCardSize ">
       <!-- Product Cards -->
-      <div
+      <router-link
           v-for="product in filteredProducts"
           :key="product.id"
           class="bg-white shadow-md rounded-lg p-4"
+          :to="`/product/${product.id}`"
       >
         <!-- Image placeholder -->
         <div class="w-full h-48 bg-gray-300 mb-4 rounded-lg">
@@ -116,8 +122,24 @@ onMounted(GetProducts);
         <p class="text-gray-600">{{ product.category.name }}</p>
         <p class="text-xl font-bold text-green-600">€{{ product.price.toFixed(2) }}</p>
         <p class="text-gray-500">Stock: {{ product.stock }}</p>
-      </div>
+      </router-link>
     </div>
+    <!-- Pagination -->
+    <div v-if="products.values != null" class="flex justify-center items-center my-6">
+      <button
+          @click="moreProducts"
+          v-if="products.length < TotalElements"
+          class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-purple-600 group-hover:from-purple-600 group-hover:to-purple-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-purple-300">
+        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
+          Show more
+        </span>
+      </button>
+
+
+    </div>
+
+
+
   </div>
 </template>
 

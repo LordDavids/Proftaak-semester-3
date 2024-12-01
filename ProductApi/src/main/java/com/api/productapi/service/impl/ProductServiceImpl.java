@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.apache.coyote.BadRequestException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,16 +24,6 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
-    public ProductPageDTO getAllProducts(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Product> products = productRepository.findAll(pageable);
-        List<ProductResponseDTO> productsList = new ArrayList<>();
-        for (Product product : products) {
-            productsList.add(new ProductResponseDTO(product));
-        }
-        return new ProductPageDTO(productsList, products.getTotalPages(), products.getTotalElements());
-    }
-
     public ProductPageDTO getProductsByCategoryId(int id ,int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Product> products = productRepository.findProductByCategoryId(id,pageable);
@@ -41,6 +32,14 @@ public class ProductServiceImpl implements ProductService {
             productsList.add(new ProductResponseDTO(product));
         }
         return new ProductPageDTO(productsList, products.getTotalPages(), products.getTotalElements());
+    }
+
+    public ProductResponseDTO getProductById(int id) throws BadRequestException {
+        var product = productRepository.findById(id).orElse(null);
+        if(product == null) {
+            throw new BadRequestException("Product not found");
+        }
+        return new ProductResponseDTO(product);
     }
 
 }

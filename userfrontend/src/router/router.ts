@@ -4,16 +4,18 @@ import user from "../userStorage.ts";
 import Home from '../views/Home.vue'
 import Login from "../views/Login.vue";
 import ErrorPage from "../views/ErrorPage.vue";
-import Product from "../views/Product.vue";
+import Product from "../views/ProductPage.vue";
 import Register from "../views/Register.vue";
+import ProductOverview from "../views/ProductOverview.vue";
 
 
 const routes = [
     { path: '/', component: Home },
     { path: '/login', component: Login },
     { path: '/error', component: ErrorPage },
-    { path: '/product/:category/:id', component: Product},
-    { path: '/register', component: Register }
+    { path: '/category/:category/:id', component: ProductOverview },
+    { path: '/register', component: Register },
+    { path: '/product/:product_id/', component: Product},
 ]
 
 const router = createRouter({

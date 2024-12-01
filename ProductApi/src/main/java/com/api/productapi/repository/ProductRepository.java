@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     Optional<Product> findProductById(Integer id);
 
-    @Query("SELECT p FROM Product p WHERE p.category.category_id = :categoryId")
+    @Query("SELECT p FROM Product p WHERE p.category.category_id = :categoryId AND p.active = true")
     Page<Product> findProductByCategoryId(Integer categoryId, Pageable pageable);
 
 
