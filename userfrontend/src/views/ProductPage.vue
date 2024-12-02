@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import {api} from "../services/apiClient.ts";
-import {ref, computed, onMounted} from 'vue';
+import {ref, onMounted} from 'vue';
 import router from "../router/router.ts";
 import {Product} from "../enteties/Product.ts";
 import {useRoute} from "vue-router";
 
-const product = ref<Product>(null)
+const product = ref<Product | null>(null);
 const route = useRoute(); // Initialize the router
-const productId = ref<number>(route.params.product_id);
+const productId = ref<string>(route.params.product_id as string );
 
 const loading = ref<boolean>(true);
 
 const GetProduct = async() => {
-  api.get(import.meta.env.VITE_API_PRODUCT +`/product/${productId.value}`, {}, {
+  api.get(import.meta.env.VITE_API_PRODUCT +`/product/${productId.value}`, {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json'
@@ -52,7 +52,7 @@ onMounted(GetProduct);
         </div>
 
         <!-- Product Details -->
-        <div v-if="loading === false" class="w-full md:w-1/2 px-4">
+        <div v-if="loading === false && product != null" class="w-full md:w-1/2 px-4">
           <h2 class="text-3xl font-bold mb-2 pb-2 border-b border-gray-300">{{product.name}}</h2>
           <p class="text-gray-600 mb-4">EAN: {{ product.articleNumber }}</p>
           <div class="mb-4">

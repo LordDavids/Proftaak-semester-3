@@ -10,14 +10,14 @@ const route = useRoute(); // Initialize the router
 
 
 const products = ref<Product[]>([]);
-const categoryId = ref<string>(route.params.id);
+const categoryId = ref<string>(route.params.id as string);
 const pageSize = ref<number>(6);
 const pageNumber = ref<number>(0);  // Track the current page number
 const TotalElements = ref<number>();
 
 
 const GetProducts = async() => {
-  api.get(import.meta.env.VITE_API_PRODUCT +`/product/${categoryId.value}/${pageNumber.value}/${pageSize.value}`, {}, {
+  api.get(import.meta.env.VITE_API_PRODUCT +`/product/${categoryId.value}/${pageNumber.value}/${pageSize.value}`, {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json'
@@ -53,10 +53,13 @@ const filters = ref({
 // Filtered products based on filters
 const filteredProducts = computed(() => {
   return products.value.filter((product) => {
+    const minPrice = parseFloat(filters.value.minPrice) || 0; // Default to 0 if minPrice is empty or invalid
+    const maxPrice = parseFloat(filters.value.maxPrice) || Infinity; // Default to Infinity if maxPrice is empty or invalid
+
     const matchesName = product.name.toLowerCase().includes(filters.value.name.toLowerCase());
     const matchesPrice =
-        (!filters.value.minPrice || product.price >= filters.value.minPrice) &&
-        (!filters.value.maxPrice || product.price <= filters.value.maxPrice);
+        (!filters.value.minPrice || product.price >= minPrice) &&
+        (!filters.value.maxPrice || product.price <= maxPrice);
 
     return matchesName && matchesPrice;
   });
@@ -65,7 +68,7 @@ const filteredProducts = computed(() => {
 watch(
     () => route.params.id,
     (newId) => {
-      categoryId.value = newId;
+      categoryId.value = newId as string;
       GetProducts(); // Fetch new products when the category changes
     }
 );
@@ -125,7 +128,7 @@ onMounted(GetProducts);
       </router-link>
     </div>
     <!-- Pagination -->
-    <div v-if="products.values != null" class="flex justify-center items-center my-6">
+    <div v-if="products.values != null && TotalElements != null" class="flex justify-center items-center my-6">
       <button
           @click="moreProducts"
           v-if="products.length < TotalElements"

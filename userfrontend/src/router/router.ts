@@ -23,7 +23,7 @@ const router = createRouter({
     routes,
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
     // console.log(`Navigating to: ${to.path}, from: ${from.path}`);
 
     // Example: Check if the route requires authentication

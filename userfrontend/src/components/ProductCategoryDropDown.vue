@@ -8,7 +8,7 @@ import {Category} from "../enteties/Category.ts";
 const categories = ref<Category[]>([]);
 
 const GetCategory = async() => {
-  api.get(import.meta.env.VITE_API_PRODUCT +"/category", {}, {
+  api.get(import.meta.env.VITE_API_PRODUCT +"/category", {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ onMounted(GetCategory);
     <div class="group relative cursor-pointer">
 
       <div class="flex items-center justify-between">
-        <a class="menu-hover lg:mx-4" onClick="">
+        <a class="menu-hover lg:mx-4">
           Products
         </a>
 
