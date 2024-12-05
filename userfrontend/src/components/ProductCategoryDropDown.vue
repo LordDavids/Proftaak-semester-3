@@ -20,7 +20,7 @@ const GetCategory = async() => {
       name: item.name
     }));
   }).catch((error) => {
-    console.log(error);
+    console.log("error with category"+ error);
     router.push("/error");
   })
 }

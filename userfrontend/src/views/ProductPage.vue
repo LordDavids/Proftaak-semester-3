@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {api} from "../services/apiClient.ts";
-import {ref, onMounted} from 'vue';
+import {ref, onMounted, onBeforeUnmount} from 'vue';
 import router from "../router/router.ts";
 import {Product} from "../enteties/Product.ts";
 import {useRoute} from "vue-router";
@@ -8,6 +8,8 @@ import {useRoute} from "vue-router";
 const product = ref<Product | null>(null);
 const route = useRoute(); // Initialize the router
 const productId = ref<string>(route.params.product_id as string );
+const productStock = ref<number | null>(null);
+let ClosePage = false;
 
 const loading = ref<boolean>(true);
 
@@ -29,15 +31,81 @@ const GetProduct = async() => {
       stock: response.data.stock,
     };
     loading.value = false;
-    console.log(product.value);
+    productStock.value = response.data.stock;
+    createSocket();
   }).catch((error) => {
     console.log(error);
     router.push("/error");
   })
 }
+// socket
 
-onMounted(GetProduct);
+let retriesCount = 0;
+const maxTries = 4;
+const reconnectInterval = 3000; // Interval between reconnection attempts in ms
 
+let socket: WebSocket;
+
+function createSocket() {
+  socket = new WebSocket('ws://localhost:8282/wbst/product-stock'); // Use `ws://` for WebSocket protocol
+
+  socket.onopen = function () {
+    console.log("Connection open");
+    retriesCount = 0; // Reset retries on successful connection
+    sendMessage(Number(route.params.product_id))
+  };
+
+  socket.onmessage = function (event) {
+    try {
+      productStock.value = event.data;
+    } catch (err){
+      console.log(err);
+    }
+  };
+
+  socket.onerror = function () {
+    console.log("Connection error:");
+    retriesCount++;
+  };
+
+  socket.onclose = function () {
+    console.log("Connection closed");
+    if (retriesCount < maxTries && !ClosePage) {
+      console.log(`Reconnecting attempt ${retriesCount}/${maxTries}...`);
+      setTimeout(createSocket, reconnectInterval);
+    } else {
+      console.log("Max reconnection attempts reached. Giving up.");
+    }
+  };
+}
+
+// Initialize WebSocket connection
+function sendMessage(message: any) {
+  if (socket.readyState === WebSocket.OPEN) {
+    socket.send(JSON.stringify(message));
+  } else {
+    console.log("Socket not open. Unable to send message:", message);
+  }
+}
+
+// Ensure socket closes on reload or navigation
+window.addEventListener('beforeunload', () => {
+  if (socket && socket.readyState === WebSocket.OPEN) {
+    socket.close(); // Gracefully close the socket
+  }
+});
+
+onMounted(() => {
+  GetProduct();
+});
+
+onBeforeUnmount(() => {
+  ClosePage = true;
+  if (socket && socket.readyState === WebSocket.OPEN) {
+    socket.close(); // Gracefully close the socket
+    console.log("WebSocket connection closed");
+  }
+});
 </script>
 
 
@@ -61,7 +129,7 @@ onMounted(GetProduct);
           <p class="text-gray-700 mb-6 border-b border-gray-300 mr-7 pb-2">{{product.description}}</p>
 
           <div class="mb-6 items-center gap-1">
-            <label for="quantity" class="text-sm font-medium text-gray-700">Online: {{ product.stock }} in stock</label>
+            <label v-if="productStock != null" for="quantity" class="text-sm font-medium text-gray-700">Online: {{ productStock }} in stock</label>
           </div>
 
           <div class="mb-7">

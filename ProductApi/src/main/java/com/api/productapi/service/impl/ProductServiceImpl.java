@@ -13,6 +13,7 @@ import org.apache.coyote.BadRequestException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -41,5 +42,10 @@ public class ProductServiceImpl implements ProductService {
         }
         return new ProductResponseDTO(product);
     }
+
+    public Optional<Integer> getProductStock(int id) {
+        return Optional.ofNullable(productRepository.findStockById(id));
+    }
+
 
 }
