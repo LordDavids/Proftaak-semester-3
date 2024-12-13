@@ -35,3 +35,13 @@
 //     }
 //   }
 // }
+
+Cypress.Commands.add('login', (email, pass) => {
+    cy.visit('http://localhost:5173/login')
+
+    cy.get('#email').type(email)
+    cy.get('#password').type(pass)
+    cy.get('#login-btn').click()
+
+    cy.url().should('eq', 'http://localhost:5173/')
+});

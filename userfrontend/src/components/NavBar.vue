@@ -61,7 +61,7 @@ const logout = async() => {
 
       <!-- Login button on the right (hugging the right edge) -->
       <div class="text-sm hidden md:flex justify-end mr-6">
-        <router-link v-if="!user" to="/login" class="text-black group ">Login
+        <router-link id="login" v-if="!user" to="/login" class="text-black group ">Login
           <div class="bg-black h-[2px] w-0 group-hover:w-full transition-all duration-500"></div></router-link>
         <button @click="logout" v-if="user">Sign out</button>
       </div>

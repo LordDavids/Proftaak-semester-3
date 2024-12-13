@@ -72,6 +72,7 @@ const handleLogin = async() => {
 
         <button
             type="submit"
+            id="submit"
             class="w-full bg-purple-800 text-white font-semibold py-2 rounded-md hover:bg-purple-900 transition duration-200">
           Login
         </button>
