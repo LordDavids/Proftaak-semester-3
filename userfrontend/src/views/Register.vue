@@ -13,15 +13,24 @@ const confirmPassword = ref('');
 const phoneNumber = ref('');
 const errorMessage = ref('');
 const router = useRouter(); // Initialize the router
+const submit = ref(false);
 
 const handleRegister = async () => {
   errorMessage.value = '';
+  submit.value = true;
 
   // Check if the passwords match
   if (password.value !== confirmPassword.value) {
     errorMessage.value = 'Passwords do not match!';
     return;
   }
+  [firstName, lastName, email, password, phoneNumber].toString().trim();
+  if ([firstName, lastName, email, password, phoneNumber].some((field) => !field.value)) {
+    errorMessage.value = 'All fields are required!';
+    return;
+
+  }
+
   console.log(firstName.value, lastName.value, email.value, password.value, phoneNumber.value);
   // Send the registration details to the server
   api.post<User>(import.meta.env.VITE_API_USER + '/auth/register', {
@@ -58,7 +67,7 @@ const handleRegister = async () => {
   <div class="flex items-center justify-center min-h-screen bg-gray-100">
     <div class="bg-white shadow-md rounded-lg p-8 w-96">
       <h2 class="text-2xl text-purple-800 font-bold mb-6 text-center">Register</h2>
-      <span class="text-red-500 text-center" v-if="errorMessage"> {{ errorMessage }} </span>
+      <span id="errorBox" class="text-red-500 text-center" v-if="errorMessage"> {{ errorMessage }} </span>
       <form @submit.prevent="handleRegister">
         <!-- First Name Field -->
         <div class="mb-4">
@@ -67,13 +76,14 @@ const handleRegister = async () => {
               type="text"
               id="firstName"
               v-model="firstName"
-              required
               class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your first name"
               minlength="1"
               maxlength="255"
           />
+          <span v-if="firstName === '' && submit == true" class="flex text-red-500">This field is required</span>
         </div>
+
 
         <!-- Last Name Field -->
         <div class="mb-4">
@@ -82,12 +92,12 @@ const handleRegister = async () => {
               type="text"
               id="lastName"
               v-model="lastName"
-              required
               class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your last name"
               minlength="1"
               maxlength="255"
           />
+          <span v-if="lastName === '' && submit == true" class="flex text-red-500">This field is required</span>
         </div>
 
         <!-- Email Field -->
@@ -97,12 +107,12 @@ const handleRegister = async () => {
               type="email"
               id="email"
               v-model="email"
-              required
               class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your email"
               minlength="4"
               maxlength="320"
           />
+          <span v-if="email === '' && submit == true" class="flex text-red-500">This field is required</span>
         </div>
 
         <!-- Password Field -->
@@ -112,11 +122,11 @@ const handleRegister = async () => {
               type="password"
               id="password"
               v-model="password"
-              required
               class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your password"
               minlength="6"
           />
+          <span v-if="password === '' && submit == true" class="flex text-red-500">This field is required</span>
         </div>
 
         <!-- Confirm Password Field -->
@@ -126,11 +136,11 @@ const handleRegister = async () => {
               type="password"
               id="confirmPassword"
               v-model="confirmPassword"
-              required
               class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Confirm your password"
               minlength="6"
           />
+          <span v-if="confirmPassword === '' && submit == true" class="flex text-red-500">This field is required</span>
         </div>
 
         <!-- Phone Number Field -->
@@ -140,14 +150,16 @@ const handleRegister = async () => {
               type="text"
               id="phoneNumber"
               v-model="phoneNumber"
-              required
               class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your phone number"
               minlength="6"
+              maxlength="15"
           />
+          <span v-if="phoneNumber === '' && submit == true" class="flex text-red-500">This field is required</span>
         </div>
 
         <button
+            id="submit"
             type="submit"
             class="w-full bg-purple-800 text-white font-semibold py-2 rounded-md hover:bg-purple-900 transition duration-200"
         >

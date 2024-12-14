@@ -44,7 +44,7 @@ const handleLogin = async() => {
   <div class="flex items-center justify-center min-h-screen bg-gray-100">
     <div class="bg-white shadow-md rounded-lg p-8 w-96">
       <h2 class="text-2xl text-purple-800 font-bold mb-6 text-center">Login</h2>
-      <span class="text-red-500 text-center" v-if="errorMessage"> {{errorMessage}} </span>
+      <span id="errorBox" class="text-red-500 text-center" v-if="errorMessage"> {{errorMessage}} </span>
       <form @submit.prevent="handleLogin">
         <div class="mb-4">
           <label for="email" class="block text-sm font-medium text-gray-700">Email</label>

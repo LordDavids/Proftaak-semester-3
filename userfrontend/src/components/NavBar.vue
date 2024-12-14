@@ -20,7 +20,7 @@ const logout = async() => {
     }
   }).then(() => {
     user.value = null;
-    router.push("/");
+    router.push("/login");
   }).catch((error) => {
     console.log(error);
     router.push("/error");
@@ -63,7 +63,7 @@ const logout = async() => {
       <div class="text-sm hidden md:flex justify-end mr-6">
         <router-link id="login" v-if="!user" to="/login" class="text-black group ">Login
           <div class="bg-black h-[2px] w-0 group-hover:w-full transition-all duration-500"></div></router-link>
-        <button @click="logout" v-if="user">Sign out</button>
+        <button id="logout" @click="logout" v-if="user">Sign out</button>
       </div>
     </div>
 

@@ -112,6 +112,7 @@ onMounted(GetProducts);
       <router-link
           v-for="product in filteredProducts"
           :key="product.id"
+          :id="'productCard' + product.id"
           class="bg-white shadow-md rounded-lg p-4"
           :to="`/product/${product.id}`"
       >
@@ -130,6 +131,7 @@ onMounted(GetProducts);
     <!-- Pagination -->
     <div v-if="products.values != null && TotalElements != null" class="flex justify-center items-center my-6">
       <button
+          id="showMore"
           @click="moreProducts"
           v-if="products.length < TotalElements"
           class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-purple-600 group-hover:from-purple-600 group-hover:to-purple-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-purple-300">
