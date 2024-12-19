@@ -86,6 +86,7 @@ onMounted(GetProducts);
         <input
             v-model="filters.name"
             type="text"
+            id="nameFilter"
             class="border rounded px-4 py-2 w-full sm:w-auto"
             placeholder="Search by name"
         />
@@ -94,12 +95,14 @@ onMounted(GetProducts);
           <input
               v-model.number="filters.minPrice"
               type="number"
+              id="minPrice"
               class="border rounded px-4 py-2 w-full sm:w-auto"
               placeholder="Min price"
           />
           <input
               v-model.number="filters.maxPrice"
               type="number"
+              id="maxPrice"
               class="border rounded px-4 py-2 w-full sm:w-auto"
               placeholder="Max price"
           />
@@ -107,7 +110,7 @@ onMounted(GetProducts);
       </div>
     </div>
 
-    <div class="grid grid-cols-1 xsm:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6 CustomProductCardSize ">
+    <div id="product-cards" class="grid grid-cols-1 xsm:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6 CustomProductCardSize ">
       <!-- Product Cards -->
       <router-link
           v-for="product in filteredProducts"
