@@ -13,12 +13,20 @@ describe('template spec', () => {
 
     cy.url().should('eq', 'http://localhost:5173/')
 
+    cy.getCookies('JWT').should('exist')
+
+    cy.window().then((window) => {
+      const item = window.localStorage.getItem('user'); // Replace 'key' with the actual key
+      expect(item).to.not.be.null;
+    });
+
     cy.get('#logout').click()
+
     cy.url().should('eq', 'http://localhost:5173/login')
 
   })
 
-  it('logout with wrong email', () => {
+  it('login with wrong email', () => {
     cy.visit('http://localhost:5173')
     cy.get('#login').click()
 
@@ -33,7 +41,7 @@ describe('template spec', () => {
     cy.get("#errorBox").should('contain', 'invalid credentials')
   });
 
-  it('logout with wrong password', () => {
+  it('login with wrong password', () => {
     cy.visit('http://localhost:5173')
     cy.get('#login').click()
 

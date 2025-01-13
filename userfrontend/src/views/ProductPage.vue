@@ -122,14 +122,14 @@ onBeforeUnmount(() => {
         <!-- Product Details -->
         <div v-if="loading === false && product != null" class="w-full md:w-1/2 px-4">
           <h2 id="productName" class="text-3xl font-bold mb-2 pb-2 border-b border-gray-300">{{product.name}}</h2>
-          <p class="text-gray-600 mb-4">EAN: {{ product.articleNumber }}</p>
+          <p id="articleNumber" class="text-gray-600 mb-4">EAN: {{ product.articleNumber }}</p>
           <div class="mb-4">
-            <span class="text-2xl font-bold mr-2">€{{product.price}}</span>
+            <span id="price" class="text-2xl font-bold mr-2">€{{product.price}}</span>
           </div>
-          <p class="text-gray-700 mb-6 border-b border-gray-300 mr-7 pb-2">{{product.description}}</p>
+          <p id="description" class="text-gray-700 mb-6 border-b border-gray-300 mr-7 pb-2">{{product.description}}</p>
 
           <div class="mb-6 items-center gap-1">
-            <label v-if="productStock != null" for="quantity" class="text-sm font-medium text-gray-700">Online: {{ productStock }} in stock</label>
+            <label id="productStock" v-if="productStock != null" for="quantity" class="text-sm font-medium text-gray-700">Online: {{ productStock }} in stock</label>
           </div>
 
           <div class="mb-7">

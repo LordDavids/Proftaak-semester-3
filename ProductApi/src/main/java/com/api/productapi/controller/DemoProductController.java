@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/product/demo")
+@RequestMapping("/api/products/demo")
 public class DemoProductController {
 
     public DemoProductController() {

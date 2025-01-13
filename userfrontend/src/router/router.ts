@@ -7,6 +7,7 @@ import ErrorPage from "../views/ErrorPage.vue";
 import Product from "../views/ProductPage.vue";
 import Register from "../views/Register.vue";
 import ProductOverview from "../views/ProductOverview.vue";
+import Demo from "../views/Demo.vue";
 
 
 const routes = [
@@ -16,6 +17,7 @@ const routes = [
     { path: '/category/:category/:id', component: ProductOverview },
     { path: '/register', component: Register },
     { path: '/product/:product_id/', component: Product},
+    { path: '/demo', component: Demo},
 ]
 
 const router = createRouter({
@@ -26,9 +28,10 @@ const router = createRouter({
 router.beforeEach((to, _from, next) => {
     // console.log(`Navigating to: ${to.path}, from: ${from.path}`);
 
-    // Example: Check if the route requires authentication
     if ((to.path === '/login' || to.path === '/register') && isAuthenticated()) {
-        console.log('authenticated! Redirecting to home');
+        console.log('Authenticated! Redirecting to home.');
+        next('/'); // Redirect to home if already authenticated
+    } else if (to.path === '/demo' && (!isAuthenticated() ||  !isAdmin())) {
         next('/'); // Redirect to login if not authenticated
     } else {
         next(); // Proceed to the route
@@ -37,10 +40,12 @@ router.beforeEach((to, _from, next) => {
 
 function isAuthenticated() {
     // Check if `user.value` exists and is not null
-    if (user.value) {
-        return true; // User is authenticated
-    }
-    return false; // User is not authenticated
+    return !!user.value;
+     // User is not authenticated
+}
+function isAdmin() {
+    // Check if `user.value` exists and is not null
+    return user.value.role.id === 2;
 }
 
 

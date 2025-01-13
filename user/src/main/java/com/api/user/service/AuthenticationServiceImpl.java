@@ -64,8 +64,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public AuthenticationResponseDTO authenticate(AuthenticationRequestDTO requestDTO) {
 
         var user = userRepository.findByEmail(requestDTO.email().toLowerCase())
+                .filter(u -> passwordEncoder.matches(requestDTO.password() + pepper, u.getPassword()))
                 .orElseThrow(() -> new InvalidCredentialsException("invalid credentials"));
-        if (passwordEncoder.matches((requestDTO.password() + pepper), user.getPassword())) {
+
             var claims = new HashMap<String, Object>();
             claims.put("roles", user.getRole().getName());
 
@@ -77,12 +78,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                     user.getRole(),
                     user.getPhoneNumber()
             );
-        }
-        throw new InvalidCredentialsException("invalid credentials");
-
-
-
-
     }
     private String encodePassword(String password) {
         return passwordEncoder.encode(password + pepper);
