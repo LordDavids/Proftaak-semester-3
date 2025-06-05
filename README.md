@@ -1,29 +1,30 @@
 🛍️ Fontys Solutions
 Fontys Solutions is een innovatieve digitale webshopapplicatie gebouwd met moderne technologieën. De applicatie biedt gebruikers een volledige online winkelervaring, van het bekijken van producten tot een veilige en efficiënte afronding van bestellingen.
 
-🚀 Functionaliteiten
-Voor klanten:
-Bladeren door een overzichtelijk productaanbod
+Project built for educational purposes at Fontys University of Applied Sciences.
 
-Bekijken van gedetailleerde productinformatie
+---
 
-Toevoegen van producten aan de winkelwagen
+## 🚀 Features
+For Customers:
+- Browse through a clear and structured product catalog
+- View detailed product information
+- Add products to the shopping cart
 
 Voor medewerkers:
-Beheer van productvoorraad via een intuïtieve beheerinterface
+- Manage product inventory through an intuitive admin interface
+- Add new products
+- Edit existing product information
 
-Toevoegen van nieuwe producten
+---
 
-Aanpassen van bestaande productinformatie
+## 🧰 Gebruikte technologieën
+- Backend:	    Java Spring Boot
+- Frontend:	    Vue 3 + Vite + TypeScript
+- Database:	    MySQL
+- testing:      Cypress (E2E testing)
 
-Gebruik van toegangsbeheer om veiligheid en structuur te garanderen
+---
 
-🧰 Gebruikte technologieën
-Onderdeel	Technologie
-Backend	Java Spring Boot
-Frontend	Vue 3 + Vite + TypeScript
-Database	MySQL
-End-to-End Testing	Cypress
-
-🧪 Testen
-De applicatie is voorzien van Cypress E2E-tests, waarmee de gebruikerservaring van begin tot eind getest wordt. Dit zorgt ervoor dat zowel klant- als medewerkersfunctionaliteit betrouwbaar en stabiel is.
+## 🧪 Testen
+The application is equipped with Cypress end-to-end tests, which simulate the user experience from start to finish. This ensures that both customer and staff functionalities are reliable and stable. also using an reset script that resets the MySql test database to ensure reliable testing
