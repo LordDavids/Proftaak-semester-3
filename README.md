@@ -19,10 +19,11 @@ Voor medewerkers:
 ---
 
 ## 🧰 Gebruikte technologieën
-- Backend:	    Java Spring Boot
-- Frontend:	    Vue 3 + Vite + TypeScript
-- Database:	    MySQL
-- testing:      Cypress (E2E testing)
+- Backend:	      Java Spring Boot
+- Frontend:	      Vue 3 + Vite + TypeScript
+- Database:	      MySQL
+- testing:        Cypress (E2E testing)
+- Communication:  JWT tokens
 
 ---
 
